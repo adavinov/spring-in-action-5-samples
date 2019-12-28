@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import lombok.extern.slf4j.Slf4j;
 import tacos.Ingredient;
 import tacos.Ingredient.Type;
 import tacos.Order;
@@ -30,77 +31,66 @@ import tacos.data.UserRepository;
 @Controller
 @RequestMapping("/design")
 @SessionAttributes("order")
-@Slf4j
 public class DesignTacoController {
-  
-  private final IngredientRepository ingredientRepo;
-  
-  private TacoRepository tacoRepo;
+	static Logger log = LoggerFactory.getLogger(DesignTacoController.class);
+	private final IngredientRepository ingredientRepo;
 
-  private UserRepository userRepo;
+	private TacoRepository tacoRepo;
 
-  @Autowired
-  public DesignTacoController(
-        IngredientRepository ingredientRepo, 
-        TacoRepository tacoRepo,
-        UserRepository userRepo) {
-    this.ingredientRepo = ingredientRepo;
-    this.tacoRepo = tacoRepo;
-    this.userRepo = userRepo;
-  }
+	private UserRepository userRepo;
 
-  @ModelAttribute(name = "order")
-  public Order order() {
-    return new Order();
-  }
-  
-  @ModelAttribute(name = "design")
-  public Taco design() {
-    return new Taco();
-  }
-  
-  @GetMapping
-  public String showDesignForm(Model model, Principal principal) {
-    log.info("   --- Designing taco");
-    List<Ingredient> ingredients = new ArrayList<>();
-    ingredientRepo.findAll().forEach(i -> ingredients.add(i));
-    
-    Type[] types = Ingredient.Type.values();
-    for (Type type : types) {
-      model.addAttribute(type.toString().toLowerCase(), 
-          filterByType(ingredients, type));      
-    }
-    
-    String username = principal.getName();
-    User user = userRepo.findByUsername(username);
-    model.addAttribute("user", user);
+	@Autowired
+	public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository tacoRepo, UserRepository userRepo) {
+		this.ingredientRepo = ingredientRepo;
+		this.tacoRepo = tacoRepo;
+		this.userRepo = userRepo;
+	}
 
-    return "design";
-  }
+	@ModelAttribute(name = "order")
+	public Order order() {
+		return new Order();
+	}
 
-  @PostMapping
-  public String processDesign(
-      @Valid Taco taco, Errors errors, 
-      @ModelAttribute Order order) {
+	@ModelAttribute(name = "design")
+	public Taco design() {
+		return new Taco();
+	}
 
-    log.info("   --- Saving taco");
+	@GetMapping
+	public String showDesignForm(Model model, Principal principal) {
+		log.info("   --- Designing taco");
+		List<Ingredient> ingredients = new ArrayList<>();
+		ingredientRepo.findAll().forEach(i -> ingredients.add(i));
 
-    if (errors.hasErrors()) {
-      return "design";
-    }
+		Type[] types = Ingredient.Type.values();
+		for (Type type : types) {
+			model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
+		}
 
-    Taco saved = tacoRepo.save(taco);
-    order.addDesign(saved);
+		String username = principal.getName();
+		User user = userRepo.findByUsername(username);
+		model.addAttribute("user", user);
 
-    return "redirect:/orders/current";
-  }
+		return "design";
+	}
 
-  private List<Ingredient> filterByType(
-      List<Ingredient> ingredients, Type type) {
-    return ingredients
-              .stream()
-              .filter(x -> x.getType().equals(type))
-              .collect(Collectors.toList());
-  }
-  
+	@PostMapping
+	public String processDesign(@Valid Taco taco, Errors errors, @ModelAttribute Order order) {
+
+		log.info("   --- Saving taco");
+
+		if (errors.hasErrors()) {
+			return "design";
+		}
+
+		Taco saved = tacoRepo.save(taco);
+		order.addDesign(saved);
+
+		return "redirect:/orders/current";
+	}
+
+	private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
+		return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
+	}
+
 }

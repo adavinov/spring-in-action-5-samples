@@ -21,38 +21,35 @@ import tacos.data.TacoRepository;
 import tacos.data.UserRepository;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(secure=false)
+@WebMvcTest(secure = false)
 public class HomeControllerTest {
 
-  @Autowired
-  private MockMvc mockMvc;
-  
-  // Note: Most of these mocks are here to avoid autowiring issues. They aren't
-  //       actually used in the course of the home page test, so their behavior
-  //       isn't important. They just need to exist so autowiring can take place.
+	@Autowired
+	private MockMvc mockMvc;
 
-  @MockBean
-  private IngredientRepository ingredientRepository;
+	// Note: Most of these mocks are here to avoid autowiring issues. They aren't
+	// actually used in the course of the home page test, so their behavior
+	// isn't important. They just need to exist so autowiring can take place.
 
-  @MockBean
-  private TacoRepository designRepository;
+	@MockBean
+	private IngredientRepository ingredientRepository;
 
-  @MockBean
-  private OrderRepository orderRepository;
+	@MockBean
+	private TacoRepository designRepository;
 
-  @MockBean
-  private UserRepository userRepository;
-  
-  @MockBean
-  private PasswordEncoder passwordEncoder;
+	@MockBean
+	private OrderRepository orderRepository;
 
-  @Test
-  public void testHomePage() throws Exception {
-    mockMvc.perform(get("/abc"))
-      .andExpect(status().isOk())
-      .andExpect(view().name("home"))
-      .andExpect(content().string(
-          containsString("Welcome to...")));  
-  }
+	@MockBean
+	private UserRepository userRepository;
+
+	@MockBean
+	private PasswordEncoder passwordEncoder;
+
+	@Test
+	public void testHomePage() throws Exception {
+		mockMvc.perform(get("/abc")).andExpect(status().isOk()).andExpect(view().name("home"))
+				.andExpect(content().string(containsString("Welcome to...")));
+	}
 
 }

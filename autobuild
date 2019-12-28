@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+for file in `find  -maxdepth 5 -type f -name "pom.xml"`
+do
+
+if grep '<!--autobuild-->' $file > /dev/null;  then
+     echo "build: " $file;
+     mvn -q -f $file clean install -Dmaven.test.skip=true;
+fi
+  
+  
+done
