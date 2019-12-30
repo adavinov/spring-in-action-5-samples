@@ -4,7 +4,7 @@
           http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>taco-cloud</artifactId>
+	<artifactId>taco-cloud-ch07</artifactId>
 	<packaging>jar</packaging>
 
 	<name>taco-cloud</name>
@@ -12,7 +12,7 @@
 
 	<parent>
 		<groupId>sia</groupId>
-  	<artifactId>taco-cloud-parent</artifactId>
+  	<artifactId>taco-cloud-ch07-parent</artifactId>
 		<version>0.0.7-SNAPSHOT</version>
 	</parent>
 
@@ -26,27 +26,27 @@
 		<!-- TacoCloud dependencies -->
 		<dependency>
 			<groupId>sia</groupId>
-			<artifactId>tacocloud-data</artifactId>
+			<artifactId>tacocloud-data-ch07</artifactId>
 			<version>${tacocloud.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>sia</groupId>
-			<artifactId>tacocloud-domain</artifactId>
+			<artifactId>tacocloud-domain-ch07</artifactId>
 			<version>${tacocloud.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>sia</groupId>
-			<artifactId>tacocloud-security</artifactId>
+			<artifactId>tacocloud-security-ch07</artifactId>
 			<version>${tacocloud.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>sia</groupId>
-			<artifactId>tacocloud-api</artifactId>
+			<artifactId>tacocloud-api-ch07</artifactId>
 			<version>${tacocloud.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>sia</groupId>
-			<artifactId>tacocloud-ui</artifactId>
+			<artifactId>tacocloud-ui-ch07</artifactId>
 			<version>${tacocloud.version}</version>
 		</dependency>
 
@@ -84,6 +84,27 @@
 			<artifactId>htmlunit-driver</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+				    <!-- API, java.xml.bind module -->
+<dependency>
+    <groupId>jakarta.xml.bind</groupId>
+    <artifactId>jakarta.xml.bind-api</artifactId>
+    <version>2.3.2</version>
+</dependency>
+
+<!-- Runtime, com.sun.xml.bind module -->
+<dependency>
+    <groupId>org.glassfish.jaxb</groupId>
+    <artifactId>jaxb-runtime</artifactId>
+    <version>2.3.2</version>
+</dependency>
+
+<dependency>
+    <groupId>org.javassist</groupId>
+    <artifactId>javassist</artifactId>
+    <version>3.23.1-GA</version>
+</dependency>
+
 	</dependencies>
 
 	<build>

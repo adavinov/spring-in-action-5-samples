@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
-@RestResource(rel="tacos", path="tacos")
+@RestResource(rel = "tacos", path = "tacos")
 public class Taco {
 
 	@Id

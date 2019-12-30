@@ -4,7 +4,7 @@
           http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>tacocloud-web</artifactId>
+	<artifactId>tacocloud-web-ch07</artifactId>
 	<packaging>jar</packaging>
 
 	<name>tacocloud-web</name>
@@ -12,7 +12,7 @@
 
 	<parent>
 		<groupId>sia</groupId>
-  	<artifactId>taco-cloud-parent</artifactId>
+  	<artifactId>taco-cloud-ch07-parent</artifactId>
 		<version>0.0.7-SNAPSHOT</version>
 	</parent>
 
@@ -26,12 +26,12 @@
 		<!-- TacoCloud dependencies -->
 		<dependency>
 			<groupId>sia</groupId>
-			<artifactId>tacocloud-data</artifactId>
+			<artifactId>tacocloud-data-ch07</artifactId>
 			<version>${tacocloud.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>sia</groupId>
-			<artifactId>tacocloud-domain</artifactId>
+			<artifactId>tacocloud-domain-ch07</artifactId>
 			<version>${tacocloud.version}</version>
 		</dependency>
 
@@ -49,12 +49,6 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
-		<!-- Lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
 
 		<!-- Misc -->
 		<dependency>

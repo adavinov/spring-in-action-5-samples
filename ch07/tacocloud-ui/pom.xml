@@ -4,12 +4,12 @@
           http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>tacocloud-ui</artifactId>
+	<artifactId>tacocloud-ui-ch07</artifactId>
 	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>sia</groupId>
-  	<artifactId>taco-cloud-parent</artifactId>
+  	<artifactId>taco-cloud-ch07-parent</artifactId>
 		<version>0.0.7-SNAPSHOT</version>
 	</parent>
 
