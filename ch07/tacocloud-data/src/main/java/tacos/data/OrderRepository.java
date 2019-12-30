@@ -8,10 +8,8 @@ import org.springframework.data.repository.CrudRepository;
 import tacos.Order;
 import tacos.User;
 
-public interface OrderRepository 
-         extends CrudRepository<Order, Long> {
+public interface OrderRepository extends CrudRepository<Order, Long> {
 
-  List<Order> findByUserOrderByPlacedAtDesc(
-          User user, Pageable pageable);
+	List<Order> findByUserOrderByPlacedAtDesc(User user, Pageable pageable);
 
 }

@@ -6,13 +6,23 @@ import java.util.Map;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import lombok.Data;
-
 @Component
-@ConfigurationProperties(prefix="taco.discount")
-@Data
+@ConfigurationProperties(prefix = "taco.discount")
+
 public class DiscountCodeProps {
 
-  private Map<String, Integer> codes = new HashMap<>();
-  
+	private Map<String, Integer> codes = new HashMap<>();
+	
+	public DiscountCodeProps() {
+		
+	}
+
+	public Map<String, Integer> getCodes() {
+		return codes;
+	}
+
+	public void setCodes(Map<String, Integer> codes) {
+		this.codes = codes;
+	}
+
 }

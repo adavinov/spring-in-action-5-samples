@@ -1,4 +1,4 @@
-security:
+spring.security:
   user:
     name: buzz
     password: infinity

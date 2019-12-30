@@ -7,16 +7,16 @@ import javax.persistence.Id;
 public class Ingredient {
 
 	@Id
-	private  String id;
-	private  String name;
-	private  Type type;
+	private String id;
+	private String name;
+	private Type type;
 
 	public static enum Type {
 		WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
 	}
-	
+
 	public Ingredient() {
-		
+
 	}
 
 	public Ingredient(String id, String name, Type type) {
