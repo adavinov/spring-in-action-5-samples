@@ -20,8 +20,6 @@ import tacos.Order;
 @RequestMapping("/orders")
 public class OrderController {
 
-    //end::baseClass[]
-    //tag::orderForm[]
 
     static Logger log = LoggerFactory.getLogger(OrderController.class);
 

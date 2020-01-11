@@ -10,11 +10,9 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 
 public class Order {
 
-    //end::allButValidation[]
+
     @NotBlank(message = "Name is required")
-    // tag::allButValidation[]
     private String name;
-    // end::allButValidation[]
 
     @NotBlank(message = "Street is required")
     // tag::allButValidation[]
