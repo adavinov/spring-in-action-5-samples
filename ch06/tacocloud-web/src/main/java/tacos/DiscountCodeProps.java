@@ -14,7 +14,7 @@ public class DiscountCodeProps {
 
 	public DiscountCodeProps() {
 		super();
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 	public Map<String, Integer> getCodes() {

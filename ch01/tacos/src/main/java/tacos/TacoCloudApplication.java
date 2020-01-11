@@ -8,11 +8,11 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class TacoCloudApplication extends SpringBootServletInitializer {
 
 
-	public static void main(String[] args) {
-		System.out.println("***************************");
-		SpringApplication.run(TacoCloudApplication.class, args); // <2>
-	}
-/*
+    public static void main(String[] args) {
+        System.out.println("***************************");
+        SpringApplication.run(TacoCloudApplication.class, args); // <2>
+    }
+    /*
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		String configLocation = System.getProperty("global.appconf.dir"); // get the default config directory location

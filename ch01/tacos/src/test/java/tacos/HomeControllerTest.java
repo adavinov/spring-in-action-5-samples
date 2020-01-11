@@ -17,19 +17,19 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(HomeController.class) // <1>
 public class HomeControllerTest {
 
-	@Autowired
-	private MockMvc mockMvc; // <2>
+    @Autowired
+    private MockMvc mockMvc; // <2>
 
-	@Test
-	public void testHomePage() throws Exception {
-		mockMvc.perform(get("/")) // <3>
+    @Test
+    public void testHomePage() throws Exception {
+        mockMvc.perform(get("/")) // <3>
 
-				.andExpect(status().isOk()) // <4>
+                .andExpect(status().isOk()) // <4>
 
-				.andExpect(view().name("home")) // <5>
+                .andExpect(view().name("home")) // <5>
 
-				.andExpect(content().string( // <6>
-						containsString("Welcome to...")));
-	}
+                .andExpect(content().string( // <6>
+                        containsString("Welcome to...")));
+    }
 
 }

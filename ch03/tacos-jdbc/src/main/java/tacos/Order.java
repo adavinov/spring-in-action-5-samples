@@ -164,11 +164,6 @@ public class Order {
 		this.tacos = tacos;
 	}
 
-	/*
-	 * // tag::newFields[] ...
-	 * 
-	 * // end::newFields[]
-	 */
-//tag::newFields[]
+
 }
-//end::newFields[]
+

@@ -9,8 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest // <2>
 public class TacoCloudApplicationTests {
 
-	@Test // <3>
-	public void contextLoads() {
-	}
+    @Test // <3>
+    public void contextLoads() {
+    }
 
 }

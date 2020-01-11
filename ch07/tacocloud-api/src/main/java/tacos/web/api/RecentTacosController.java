@@ -30,7 +30,7 @@ public class RecentTacosController {
 		List<Taco> tacos = tacoRepo.findAll(page).getContent();
 
 		List<TacoResource> tacoResources = new TacoResourceAssembler().toResources(tacos);
-		Resources<TacoResource> recentResources = new Resources<TacoResource>(tacoResources);
+		Resources<TacoResource> recentResources = new Resources<>(tacoResources);
 
 		recentResources.add(linkTo(methodOn(RecentTacosController.class).recentTacos()).withRel("recents"));
 		return new ResponseEntity<>(recentResources, HttpStatus.OK);

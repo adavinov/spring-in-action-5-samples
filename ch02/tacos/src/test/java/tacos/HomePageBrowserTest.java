@@ -17,35 +17,35 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class HomePageBrowserTest {
 
-	@LocalServerPort
-	private int port;
-	private static HtmlUnitDriver browser;
+    @LocalServerPort
+    private int port;
+    private static HtmlUnitDriver browser;
 
-	@BeforeClass
-	public static void setup() {
-		browser = new HtmlUnitDriver();
+    @BeforeClass
+    public static void setup() {
+        browser = new HtmlUnitDriver();
 
-		browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	}
+        browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
 
-	@AfterClass
-	public static void teardown() {
-		browser.quit();
-	}
+    @AfterClass
+    public static void teardown() {
+        browser.quit();
+    }
 
-	@Test
-	public void testHomePage() {
-		String homePage = "http://localhost:" + port;
-		browser.get(homePage);
+    @Test
+    public void testHomePage() {
+        String homePage = "http://localhost:" + port;
+        browser.get(homePage);
 
-		String titleText = browser.getTitle();
-		Assert.assertEquals("Taco Cloud", titleText);
+        String titleText = browser.getTitle();
+        Assert.assertEquals("Taco Cloud", titleText);
 
-		String h1Text = browser.findElementByTagName("h1").getText();
-		Assert.assertEquals("Welcome to...", h1Text);
+        String h1Text = browser.findElementByTagName("h1").getText();
+        Assert.assertEquals("Welcome to...", h1Text);
 
-		String imgSrc = browser.findElementByTagName("img").getAttribute("src");
-		Assert.assertEquals(homePage + "/images/TacoCloud.png", imgSrc);
-	}
+        String imgSrc = browser.findElementByTagName("img").getAttribute("src");
+        Assert.assertEquals(homePage + "/images/TacoCloud.png", imgSrc);
+    }
 
 }

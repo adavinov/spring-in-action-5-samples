@@ -13,19 +13,19 @@ import tacos.DiscountCodeProps;
 @RequestMapping("/discounts")
 public class DiscountController {
 
-  private DiscountCodeProps discountProps;
+    private DiscountCodeProps discountProps;
 
-  public DiscountController(DiscountCodeProps discountProps) {
-    this.discountProps = discountProps;
-  }
-  
-  @GetMapping
-  public String displayDiscountCodes(Model model) {
-    
-    Map<String, Integer> codes = discountProps.getCodes();
-    model.addAttribute("codes", codes);
-    
-    return "discountList";
-  }
-  
+    public DiscountController(DiscountCodeProps discountProps) {
+        this.discountProps = discountProps;
+    }
+
+    @GetMapping
+    public String displayDiscountCodes(Model model) {
+
+        Map<String, Integer> codes = discountProps.getCodes();
+        model.addAttribute("codes", codes);
+
+        return "discountList";
+    }
+
 }

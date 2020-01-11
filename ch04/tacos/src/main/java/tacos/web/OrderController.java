@@ -22,50 +22,50 @@ import tacos.data.OrderRepository;
 @RequestMapping("/orders")
 @SessionAttributes("order")
 public class OrderController {
-	static Logger log = LoggerFactory.getLogger(OrderController.class);
-	private OrderRepository orderRepo;
+    static Logger log = LoggerFactory.getLogger(OrderController.class);
+    private OrderRepository orderRepo;
 
-	public OrderController(OrderRepository orderRepo) {
-		this.orderRepo = orderRepo;
-	}
+    public OrderController(OrderRepository orderRepo) {
+        this.orderRepo = orderRepo;
+    }
 
-	@GetMapping("/current")
-	public String orderForm(@AuthenticationPrincipal User user, @ModelAttribute Order order) {
-		if (order.getDeliveryName() == null) {
-			order.setDeliveryName(user.getFullname());
-		}
-		if (order.getDeliveryStreet() == null) {
-			order.setDeliveryStreet(user.getStreet());
-		}
-		if (order.getDeliveryCity() == null) {
-			order.setDeliveryCity(user.getCity());
-		}
-		if (order.getDeliveryState() == null) {
-			order.setDeliveryState(user.getState());
-		}
-		if (order.getDeliveryZip() == null) {
-			order.setDeliveryZip(user.getZip());
-		}
+    @GetMapping("/current")
+    public String orderForm(@AuthenticationPrincipal User user, @ModelAttribute Order order) {
+        if (order.getDeliveryName() == null) {
+            order.setDeliveryName(user.getFullname());
+        }
+        if (order.getDeliveryStreet() == null) {
+            order.setDeliveryStreet(user.getStreet());
+        }
+        if (order.getDeliveryCity() == null) {
+            order.setDeliveryCity(user.getCity());
+        }
+        if (order.getDeliveryState() == null) {
+            order.setDeliveryState(user.getState());
+        }
+        if (order.getDeliveryZip() == null) {
+            order.setDeliveryZip(user.getZip());
+        }
 
-		return "orderForm";
-	}
+        return "orderForm";
+    }
 
-	// tag::processOrderWithAuthenticationPrincipal[]
-	@PostMapping
-	public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus,
-			@AuthenticationPrincipal User user) {
+    // tag::processOrderWithAuthenticationPrincipal[]
+    @PostMapping
+    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus,
+            @AuthenticationPrincipal User user) {
 
-		if (errors.hasErrors()) {
-			return "orderForm";
-		}
+        if (errors.hasErrors()) {
+            return "orderForm";
+        }
 
-		order.setUser(user);
+        order.setUser(user);
 
-		orderRepo.save(order);
-		sessionStatus.setComplete();
+        orderRepo.save(order);
+        sessionStatus.setComplete();
 
-		return "redirect:/";
-	}
-	// end::processOrderWithAuthenticationPrincipal[]
+        return "redirect:/";
+    }
+    // end::processOrderWithAuthenticationPrincipal[]
 
 }

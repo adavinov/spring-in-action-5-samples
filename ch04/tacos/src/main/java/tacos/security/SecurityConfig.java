@@ -23,50 +23,50 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//end::securityConfigOuterClass[]
+    //end::securityConfigOuterClass[]
 
-//tag::customUserDetailsService[]
-	@Autowired
-	private UserDetailsService userDetailsService;
+    //tag::customUserDetailsService[]
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-//end::customUserDetailsService[]
+    //end::customUserDetailsService[]
 
-	// tag::configureHttpSecurity[]
-	// tag::authorizeRequests[]
-	// tag::customLoginPage[]
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/design", "/orders").access("hasRole('ROLE_USER')")
-				.antMatchers("/", "/**").access("permitAll")
-				// end::authorizeRequests[]
+    // tag::configureHttpSecurity[]
+    // tag::authorizeRequests[]
+    // tag::customLoginPage[]
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests().antMatchers("/design", "/orders").access("hasRole('ROLE_USER')")
+                .antMatchers("/", "/**").access("permitAll")
+                // end::authorizeRequests[]
 
-				.and().formLogin().loginPage("/login")
-				// end::customLoginPage[]
+                .and().formLogin().loginPage("/login")
+                // end::customLoginPage[]
 
-				// tag::enableLogout[]
-				.and().logout().logoutSuccessUrl("/")
-				// end::enableLogout[]
+                // tag::enableLogout[]
+                .and().logout().logoutSuccessUrl("/")
+                // end::enableLogout[]
 
-				// Make H2-Console non-secured; for debug purposes
-				// tag::csrfIgnore[]
-				.and().csrf().ignoringAntMatchers("/h2-console/**")
-				// end::csrfIgnore[]
+                // Make H2-Console non-secured; for debug purposes
+                // tag::csrfIgnore[]
+                .and().csrf().ignoringAntMatchers("/h2-console/**")
+                // end::csrfIgnore[]
 
-				// Allow pages to be loaded in frames from the same origin; needed for
-				// H2-Console
-				// tag::frameOptionsSameOrigin[]
-				.and().headers().frameOptions().sameOrigin()
-		// end::frameOptionsSameOrigin[]
+                // Allow pages to be loaded in frames from the same origin; needed for
+                // H2-Console
+                // tag::frameOptionsSameOrigin[]
+                .and().headers().frameOptions().sameOrigin()
+        // end::frameOptionsSameOrigin[]
 
-		// tag::authorizeRequests[]
-		// tag::customLoginPage[]
-		;
-	}
-//end::configureHttpSecurity[]
-//end::authorizeRequests[]
-//end::customLoginPage[]
+        // tag::authorizeRequests[]
+        // tag::customLoginPage[]
+        ;
+    }
+    //end::configureHttpSecurity[]
+    //end::authorizeRequests[]
+    //end::customLoginPage[]
 
-	/*
+    /*
 	 * //tag::customUserDetailsService[]
 	 * 
 	 * @Override protected void configure(AuthenticationManagerBuilder auth) throws
@@ -78,24 +78,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * 
 	 */
 
-	// tag::customUserDetailsService_withPasswordEncoder[]
-	@Bean
-	public PasswordEncoder encoder() {
-		return new StandardPasswordEncoder("53cr3t");
-	}
+    // tag::customUserDetailsService_withPasswordEncoder[]
+    @Bean
+    public PasswordEncoder encoder() {
+        return new StandardPasswordEncoder("53cr3t");
+    }
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-		auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
 
-	}
-	// end::customUserDetailsService_withPasswordEncoder[]
+    }
+    // end::customUserDetailsService_withPasswordEncoder[]
 
-//
-// IN MEMORY AUTHENTICATION EXAMPLE
-//
-	/*
+    //
+    // IN MEMORY AUTHENTICATION EXAMPLE
+    //
+    /*
 	 * //tag::configureAuthentication_inMemory[]
 	 * 
 	 * @Override protected void configure(AuthenticationManagerBuilder auth) throws
@@ -108,10 +108,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * } //end::configureAuthentication_inMemory[]
 	 */
 
-//
-// JDBC Authentication example
-//
-	/*
+    //
+    // JDBC Authentication example
+    //
+    /*
 	 * //tag::configureAuthentication_jdbc[]
 	 * 
 	 * @Autowired DataSource dataSource;
@@ -124,7 +124,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * } //end::configureAuthentication_jdbc[]
 	 */
 
-	/*
+    /*
 	 * //tag::configureAuthentication_jdbc_withQueries[]
 	 * 
 	 * @Override protected void configure(AuthenticationManagerBuilder auth) throws
@@ -138,7 +138,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * } //end::configureAuthentication_jdbc_withQueries[]
 	 */
 
-	/*
+    /*
 	 * //tag::configureAuthentication_jdbc_passwordEncoder[]
 	 * 
 	 * @Override protected void configure(AuthenticationManagerBuilder auth) throws
@@ -153,10 +153,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * } //end::configureAuthentication_jdbc_passwordEncoder[]
 	 */
 
-//
-// LDAP Authentication example
-//
-	/*
+    //
+    // LDAP Authentication example
+    //
+    /*
 	 * //tag::configureAuthentication_ldap[]
 	 * 
 	 * @Override protected void configure(AuthenticationManagerBuilder auth) throws
@@ -164,7 +164,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * .groupSearchFilter("member={0}"); } //end::configureAuthentication_ldap[]
 	 */
 
-//tag::securityConfigOuterClass[]
+    //tag::securityConfigOuterClass[]
 
 }
 //end::securityConfigOuterClass[]

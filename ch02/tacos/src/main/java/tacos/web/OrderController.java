@@ -20,19 +20,19 @@ import tacos.Order;
 @RequestMapping("/orders")
 public class OrderController {
 
-//end::baseClass[]
-//tag::orderForm[]
+    //end::baseClass[]
+    //tag::orderForm[]
 
-	static Logger log = LoggerFactory.getLogger(OrderController.class);
+    static Logger log = LoggerFactory.getLogger(OrderController.class);
 
-	@GetMapping("/current")
-	public String orderForm(Model model) {
-		model.addAttribute("order", new Order());
-		return "orderForm";
-	}
-//end::orderForm[]
+    @GetMapping("/current")
+    public String orderForm(Model model) {
+        model.addAttribute("order", new Order());
+        return "orderForm";
+    }
+    //end::orderForm[]
 
-	/*
+    /*
 	 * //tag::handlePost[]
 	 * 
 	 * @PostMapping public String processOrder(Order order) {
@@ -40,19 +40,19 @@ public class OrderController {
 	 * //end::handlePost[]
 	 */
 
-//tag::handlePostWithValidation[]
-	@PostMapping
-	public String processOrder(@Valid Order order, Errors errors) {
-		if (errors.hasErrors()) {
-			return "orderForm";
-		}
+    //tag::handlePostWithValidation[]
+    @PostMapping
+    public String processOrder(@Valid Order order, Errors errors) {
+        if (errors.hasErrors()) {
+            return "orderForm";
+        }
 
-		log.info("Order submitted: " + order);
-		return "redirect:/";
-	}
-//end::handlePostWithValidation[]
+        log.info("Order submitted: " + order);
+        return "redirect:/";
+    }
+    //end::handlePostWithValidation[]
 
-//tag::baseClass[]
+    //tag::baseClass[]
 
 }
 //end::baseClass[]

@@ -31,39 +31,18 @@ public class RawJdbcIngredientRepository implements IngredientRepository {
 	@Override
 	public Iterable<Ingredient> findAll() {
 		List<Ingredient> ingredients = new ArrayList<>();
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		try {
-			connection = dataSource.getConnection();
-			statement = connection.prepareStatement("select id, name, type from Ingredient");
-			resultSet = statement.executeQuery();
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement("select id, name, type from Ingredient");
+				ResultSet resultSet = statement.executeQuery();) {
+
 			while (resultSet.next()) {
 				Ingredient ingredient = new Ingredient(resultSet.getString("id"), resultSet.getString("name"),
 						Ingredient.Type.valueOf(resultSet.getString("type")));
 				ingredients.add(ingredient);
 			}
 		} catch (SQLException e) {
-			// ??? What should be done here ???
-		} finally {
-			if (resultSet != null) {
-				try {
-					resultSet.close();
-				} catch (SQLException e) {
-				}
-			}
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException e) {
-				}
-			}
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-				}
-			}
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ingredients;
 	}
@@ -71,41 +50,20 @@ public class RawJdbcIngredientRepository implements IngredientRepository {
 	// tag::rawfindOne[]
 	@Override
 	public Ingredient findById(String id) {
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		try {
-			connection = dataSource.getConnection();
-			statement = connection.prepareStatement("select id, name, type from Ingredient");
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement("select id, name, type from Ingredient");) {
 			statement.setString(1, id);
-			resultSet = statement.executeQuery();
-			Ingredient ingredient = null;
-			if (resultSet.next()) {
-				ingredient = new Ingredient(resultSet.getString("id"), resultSet.getString("name"),
-						Ingredient.Type.valueOf(resultSet.getString("type")));
+			try (ResultSet resultSet = statement.executeQuery()) {
+				Ingredient ingredient = null;
+				if (resultSet.next()) {
+					ingredient = new Ingredient(resultSet.getString("id"), resultSet.getString("name"),
+							Ingredient.Type.valueOf(resultSet.getString("type")));
+				}
+				resultSet.close();
+				return ingredient;
 			}
-			return ingredient;
 		} catch (SQLException e) {
-			// ??? What should be done here ???
-		} finally {
-			if (resultSet != null) {
-				try {
-					resultSet.close();
-				} catch (SQLException e) {
-				}
-			}
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException e) {
-				}
-			}
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-				}
-			}
+			e.printStackTrace();
 		}
 		return null;
 	}

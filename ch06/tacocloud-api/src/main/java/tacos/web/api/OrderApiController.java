@@ -81,6 +81,7 @@ public class OrderApiController {
 		try {
 			repo.deleteById(orderId);
 		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
 		}
 	}
 

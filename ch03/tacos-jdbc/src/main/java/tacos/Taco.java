@@ -6,15 +6,12 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-// tag::newFields[]
 
 public class Taco {
 
 	private Long id;
 
 	private Date createdAt;
-
-//end::newFields[]
 
 	@NotNull
 	@Size(min = 5, message = "Name must be at least 5 characters long")
@@ -25,7 +22,7 @@ public class Taco {
 
 	public Taco() {
 		super();
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 	public Taco(Long id, Date createdAt,
@@ -70,11 +67,6 @@ public class Taco {
 		this.ingredients = ingredients;
 	}
 
-	/*
-	 * //tag::newFields[] ...
-	 * 
-	 * //end::newFields[]
-	 */
-//tag::newFields[]
+
 }
-//end::newFields[]
+

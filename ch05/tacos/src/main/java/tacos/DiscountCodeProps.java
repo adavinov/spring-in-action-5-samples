@@ -7,22 +7,22 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix="taco.discount")
+@ConfigurationProperties(prefix = "taco.discount")
 public class DiscountCodeProps {
 
-  private Map<String, Integer> codes = new HashMap<>();
+    private Map<String, Integer> codes = new HashMap<>();
 
-public DiscountCodeProps() {
-	super();
-	// TODO Auto-generated constructor stub
-}
+    public DiscountCodeProps() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-public Map<String, Integer> getCodes() {
-	return codes;
-}
+    public Map<String, Integer> getCodes() {
+        return codes;
+    }
 
-public void setCodes(Map<String, Integer> codes) {
-	this.codes = codes;
-}
-  
+    public void setCodes(Map<String, Integer> codes) {
+        this.codes = codes;
+    }
+
 }
