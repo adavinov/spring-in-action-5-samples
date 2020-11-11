@@ -24,59 +24,59 @@ import tacos.data.OrderRepository;
 @SessionAttributes("order")
 public class OrderController {
 
-	private OrderRepository orderRepo;
+    private OrderRepository orderRepo;
 
-	private OrderProps props;
+    private OrderProps props;
 
-	public OrderController(OrderRepository orderRepo, OrderProps props) {
-		this.orderRepo = orderRepo;
-		this.props = props;
-	}
+    public OrderController(OrderRepository orderRepo, OrderProps props) {
+        this.orderRepo = orderRepo;
+        this.props = props;
+    }
 
-	@GetMapping("/current")
-	public String orderForm(@AuthenticationPrincipal User user, @ModelAttribute Order order) {
-		if (order.getDeliveryName() == null) {
-			order.setDeliveryName(user.getFullname());
-		}
-		if (order.getDeliveryStreet() == null) {
-			order.setDeliveryStreet(user.getStreet());
-		}
-		if (order.getDeliveryCity() == null) {
-			order.setDeliveryCity(user.getCity());
-		}
-		if (order.getDeliveryState() == null) {
-			order.setDeliveryState(user.getState());
-		}
-		if (order.getDeliveryZip() == null) {
-			order.setDeliveryZip(user.getZip());
-		}
+    @GetMapping("/current")
+    public String orderForm(@AuthenticationPrincipal User user, @ModelAttribute Order order) {
+        if (order.getDeliveryName() == null) {
+            order.setDeliveryName(user.getFullname());
+        }
+        if (order.getDeliveryStreet() == null) {
+            order.setDeliveryStreet(user.getStreet());
+        }
+        if (order.getDeliveryCity() == null) {
+            order.setDeliveryCity(user.getCity());
+        }
+        if (order.getDeliveryState() == null) {
+            order.setDeliveryState(user.getState());
+        }
+        if (order.getDeliveryZip() == null) {
+            order.setDeliveryZip(user.getZip());
+        }
 
-		return "orderForm";
-	}
+        return "orderForm";
+    }
 
-	@PostMapping
-	public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus,
-			@AuthenticationPrincipal User user) {
+    @PostMapping
+    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus,
+            @AuthenticationPrincipal User user) {
 
-		if (errors.hasErrors()) {
-			return "orderForm";
-		}
+        if (errors.hasErrors()) {
+            return "orderForm";
+        }
 
-		order.setUser(user);
+        order.setUser(user);
 
-		orderRepo.save(order);
-		sessionStatus.setComplete();
+        orderRepo.save(order);
+        sessionStatus.setComplete();
 
-		return "redirect:/";
-	}
+        return "redirect:/";
+    }
 
-	@GetMapping
-	public String ordersForUser(@AuthenticationPrincipal User user, Model model) {
+    @GetMapping
+    public String ordersForUser(@AuthenticationPrincipal User user, Model model) {
 
-		Pageable pageable = PageRequest.of(0, props.getPageSize());
-		model.addAttribute("orders", orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
+        Pageable pageable = PageRequest.of(0, props.getPageSize());
+        model.addAttribute("orders", orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
 
-		return "orderList";
-	}
+        return "orderList";
+    }
 
 }

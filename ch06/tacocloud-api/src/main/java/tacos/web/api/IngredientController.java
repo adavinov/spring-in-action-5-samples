@@ -14,16 +14,16 @@ import tacos.data.IngredientRepository;
 @CrossOrigin(origins = "*")
 public class IngredientController {
 
-	private IngredientRepository repo;
+    private IngredientRepository repo;
 
-	@Autowired
-	public IngredientController(IngredientRepository repo) {
-		this.repo = repo;
-	}
+    @Autowired
+    public IngredientController(IngredientRepository repo) {
+        this.repo = repo;
+    }
 
-	@GetMapping
-	public Iterable<Ingredient> allIngredients() {
-		return repo.findAll();
-	}
+    @GetMapping
+    public Iterable<Ingredient> allIngredients() {
+        return repo.findAll();
+    }
 
 }
