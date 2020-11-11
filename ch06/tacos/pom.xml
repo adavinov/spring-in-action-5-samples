@@ -87,18 +87,23 @@
 		</dependency>
 
 		<!-- API, java.xml.bind module -->
-		<!--dependency>
+		<dependency>
 			<groupId>jakarta.xml.bind</groupId>
 			<artifactId>jakarta.xml.bind-api</artifactId>
 			<version>2.3.2</version>
-		</dependency-->
+		</dependency>
 
 		<!-- Runtime, com.sun.xml.bind module -->
-		<!--dependency>
+		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
-		</dependency-->
-
+			 <version>2.3.2</version>
+		</dependency>
+<dependency>
+    <groupId>org.javassist</groupId>
+    <artifactId>javassist</artifactId>
+    <version>3.23.1-GA</version>
+</dependency>
 	</dependencies>
 
 	<build>
