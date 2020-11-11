@@ -36,7 +36,7 @@
 		</dependency>
 		<dependency>
 			<groupId>sia</groupId>
-			<artifactId>tacocloud-security</artifactId>
+			<artifactId>tacocloud-security-ch07</artifactId>
 			<version>${tacocloud.version}</version>
 		</dependency>
 

@@ -11,18 +11,18 @@ import org.springframework.stereotype.Component;
 
 public class DiscountCodeProps {
 
-	private Map<String, Integer> codes = new HashMap<>();
-	
-	public DiscountCodeProps() {
-		
-	}
+    private Map<String, Integer> codes = new HashMap<>();
 
-	public Map<String, Integer> getCodes() {
-		return codes;
-	}
+    public DiscountCodeProps() {
 
-	public void setCodes(Map<String, Integer> codes) {
-		this.codes = codes;
-	}
+    }
+
+    public Map<String, Integer> getCodes() {
+        return codes;
+    }
+
+    public void setCodes(final Map<String, Integer> codes) {
+        this.codes = codes;
+    }
 
 }

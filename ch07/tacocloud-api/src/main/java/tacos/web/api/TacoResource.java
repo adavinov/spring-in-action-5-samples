@@ -11,30 +11,30 @@ import tacos.Taco;
 @Relation(value = "taco", collectionRelation = "tacos")
 public class TacoResource extends ResourceSupport {
 
-	private static final IngredientResourceAssembler ingredientAssembler = new IngredientResourceAssembler();
+    private static final IngredientResourceAssembler ingredientAssembler = new IngredientResourceAssembler();
 
-	private final String name;
+    private final String name;
 
-	private final Date createdAt;
+    private final Date createdAt;
 
-	private final List<IngredientResource> ingredients;
+    private final List<IngredientResource> ingredients;
 
-	public TacoResource(Taco taco) {
-		this.name = taco.getName();
-		this.createdAt = taco.getCreatedAt();
-		this.ingredients = ingredientAssembler.toResources(taco.getIngredients());
-	}
+    public TacoResource(final Taco taco) {
+        this.name = taco.getName();
+        this.createdAt = taco.getCreatedAt();
+        this.ingredients = ingredientAssembler.toResources(taco.getIngredients());
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
+    public Date getCreatedAt() {
+        return createdAt;
+    }
 
-	public List<IngredientResource> getIngredients() {
-		return ingredients;
-	}
+    public List<IngredientResource> getIngredients() {
+        return ingredients;
+    }
 
 }

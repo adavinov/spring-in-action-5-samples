@@ -7,29 +7,29 @@ import tacos.Ingredient.Type;
 
 public class IngredientResource extends ResourceSupport {
 
-	private String name;
+    private String name;
 
-	private Type type;
+    private Type type;
 
-	public IngredientResource(Ingredient ingredient) {
-		this.name = ingredient.getName();
-		this.type = ingredient.getType();
-	}
+    public IngredientResource(final Ingredient ingredient) {
+        this.name = ingredient.getName();
+        this.type = ingredient.getType();
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(final String name) {
+        this.name = name;
+    }
 
-	public Type getType() {
-		return type;
-	}
+    public Type getType() {
+        return type;
+    }
 
-	public void setType(Type type) {
-		this.type = type;
-	}
+    public void setType(final Type type) {
+        this.type = type;
+    }
 
 }

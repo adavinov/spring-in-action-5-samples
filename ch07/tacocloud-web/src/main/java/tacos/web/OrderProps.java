@@ -12,20 +12,20 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class OrderProps {
 
-	@Min(value = 5, message = "must be between 5 and 25")
-	@Max(value = 25, message = "must be between 5 and 25")
-	private int pageSize = 20;
-	
-	public OrderProps() {
-		
-	}
+    @Min(value = 5, message = "must be between 5 and 25")
+    @Max(value = 25, message = "must be between 5 and 25")
+    private int pageSize = 20;
 
-	public int getPageSize() {
-		return pageSize;
-	}
+    public OrderProps() {
 
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(final int pageSize) {
+        this.pageSize = pageSize;
+    }
 
 }

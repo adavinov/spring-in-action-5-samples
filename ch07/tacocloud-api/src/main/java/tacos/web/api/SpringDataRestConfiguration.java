@@ -6,12 +6,13 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapt
 
 import tacos.Ingredient;
 
+@SuppressWarnings("deprecation")
 @Configuration
 public class SpringDataRestConfiguration extends RepositoryRestConfigurerAdapter {
 
-	@Override
-	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-		config.exposeIdsFor(Ingredient.class);
-	}
+    @Override
+    public void configureRepositoryRestConfiguration(final RepositoryRestConfiguration config) {
+        config.exposeIdsFor(Ingredient.class);
+    }
 
 }

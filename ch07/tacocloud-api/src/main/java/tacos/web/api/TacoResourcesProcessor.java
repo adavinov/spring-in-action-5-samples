@@ -11,17 +11,17 @@ import tacos.Taco;
 @Component
 public class TacoResourcesProcessor implements ResourceProcessor<PagedResources<Resource<Taco>>> {
 
-	private final EntityLinks entityLinks;
+    private final EntityLinks entityLinks;
 
-	public TacoResourcesProcessor(EntityLinks entityLinks) {
-		this.entityLinks = entityLinks;
-	}
+    public TacoResourcesProcessor(final EntityLinks entityLinks) {
+        this.entityLinks = entityLinks;
+    }
 
-	@Override
-	public PagedResources<Resource<Taco>> process(PagedResources<Resource<Taco>> resources) {
-		resources.add(entityLinks.linkFor(Taco.class).slash("recent").withRel("recents"));
+    @Override
+    public PagedResources<Resource<Taco>> process(final PagedResources<Resource<Taco>> resources) {
+        resources.add(entityLinks.linkFor(Taco.class).slash("recent").withRel("recents"));
 
-		return resources;
-	}
+        return resources;
+    }
 
 }
