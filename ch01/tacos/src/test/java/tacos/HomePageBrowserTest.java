@@ -35,16 +35,16 @@ public class HomePageBrowserTest {
 
     @Test
     public void testHomePage() {
-        String homePage = "http://localhost:" + port;
+        final String homePage = "http://localhost:" + port;
         browser.get(homePage);
 
-        String titleText = browser.getTitle();
+        final String titleText = browser.getTitle();
         Assert.assertEquals("Taco Cloud", titleText);
 
-        String h1Text = browser.findElementByTagName("h1").getText();
+        final String h1Text = browser.findElementByTagName("h1").getText();
         Assert.assertEquals("Welcome to...", h1Text);
 
-        String imgSrc = browser.findElementByTagName("img").getAttribute("src");
+        final String imgSrc = browser.findElementByTagName("img").getAttribute("src");
         Assert.assertEquals(homePage + "/images/TacoCloud.png", imgSrc);
     }
 

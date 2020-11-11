@@ -20,27 +20,25 @@ import tacos.Order;
 @RequestMapping("/orders")
 public class OrderController {
 
-
     static Logger log = LoggerFactory.getLogger(OrderController.class);
 
     @GetMapping("/current")
-    public String orderForm(Model model) {
+    public String orderForm(final Model model) {
         model.addAttribute("order", new Order());
         return "orderForm";
     }
     //end::orderForm[]
 
     /*
-	 * //tag::handlePost[]
-	 * 
-	 * @PostMapping public String processOrder(Order order) {
-	 * log.info("Order submitted: " + order); return "redirect:/"; }
-	 * //end::handlePost[]
-	 */
+     * //tag::handlePost[]
+     *
+     * @PostMapping public String processOrder(Order order) { log.info("Order submitted: " + order); return "redirect:/"; }
+     * //end::handlePost[]
+     */
 
     //tag::handlePostWithValidation[]
     @PostMapping
-    public String processOrder(@Valid Order order, Errors errors) {
+    public String processOrder(@Valid final Order order, final Errors errors) {
         if (errors.hasErrors()) {
             return "orderForm";
         }

@@ -17,63 +17,62 @@ import tacos.Ingredient;
  * Raw implementation of {@link IngredientRepository} for comparison with
  * {@link JdbcIngredientRepository} to illustrate the power of using
  * {@link JdbcTemplate}.
- * 
+ *
  * @author habuma
  */
 public class RawJdbcIngredientRepository implements IngredientRepository {
 
-	private DataSource dataSource;
+    private final DataSource dataSource;
 
-	public RawJdbcIngredientRepository(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
+    public RawJdbcIngredientRepository(final DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
-	@Override
-	public Iterable<Ingredient> findAll() {
-		List<Ingredient> ingredients = new ArrayList<>();
-		try (Connection connection = dataSource.getConnection();
-				PreparedStatement statement = connection.prepareStatement("select id, name, type from Ingredient");
-				ResultSet resultSet = statement.executeQuery();) {
+    @Override
+    public Iterable<Ingredient> findAll() {
+        final List<Ingredient> ingredients = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection.prepareStatement("select id, name, type from Ingredient");
+                ResultSet resultSet = statement.executeQuery();) {
 
-			while (resultSet.next()) {
-				Ingredient ingredient = new Ingredient(resultSet.getString("id"), resultSet.getString("name"),
-						Ingredient.Type.valueOf(resultSet.getString("type")));
-				ingredients.add(ingredient);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ingredients;
-	}
+            while (resultSet.next()) {
+                final Ingredient ingredient = new Ingredient(resultSet.getString("id"), resultSet.getString("name"),
+                        Ingredient.Type.valueOf(resultSet.getString("type")));
+                ingredients.add(ingredient);
+            }
+        } catch (final SQLException e) {
+            e.printStackTrace();
+        }
+        return ingredients;
+    }
 
-	// tag::rawfindOne[]
-	@Override
-	public Ingredient findById(String id) {
-		try (Connection connection = dataSource.getConnection();
-				PreparedStatement statement = connection.prepareStatement("select id, name, type from Ingredient");) {
-			statement.setString(1, id);
-			try (ResultSet resultSet = statement.executeQuery()) {
-				Ingredient ingredient = null;
-				if (resultSet.next()) {
-					ingredient = new Ingredient(resultSet.getString("id"), resultSet.getString("name"),
-							Ingredient.Type.valueOf(resultSet.getString("type")));
-				}
-				resultSet.close();
-				return ingredient;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	// end::rawfindOne[]
+    // tag::rawfindOne[]
+    @Override
+    public Ingredient findById(final String id) {
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection.prepareStatement("select id, name, type from Ingredient");) {
+            statement.setString(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                Ingredient ingredient = null;
+                if (resultSet.next()) {
+                    ingredient = new Ingredient(resultSet.getString("id"), resultSet.getString("name"),
+                            Ingredient.Type.valueOf(resultSet.getString("type")));
+                }
+                resultSet.close();
+                return ingredient;
+            }
+        } catch (final SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    // end::rawfindOne[]
 
-	@Override
-	public Ingredient save(Ingredient ingredient) {
-		// TODO: I only needed one method for comparison purposes, so
-		// I've not bothered implementing this one (yet).
-		return null;
-	}
+    @Override
+    public Ingredient save(final Ingredient ingredient) {
+        // TODO: I only needed one method for comparison purposes, so
+        // I've not bothered implementing this one (yet).
+        return null;
+    }
 
 }

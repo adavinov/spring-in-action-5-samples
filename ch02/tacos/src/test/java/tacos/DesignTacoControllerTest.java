@@ -43,7 +43,6 @@ public class DesignTacoControllerTest {
                 new Ingredient("CHED", "Cheddar", Type.CHEESE), new Ingredient("JACK", "Monterrey Jack", Type.CHEESE),
                 new Ingredient("SLSA", "Salsa", Type.SAUCE), new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
 
-
         design = new Taco();
         design.setName("Test Taco");
         design.setIngredients(Arrays.asList("FLTO", "GRBF", "CHED"));
@@ -67,6 +66,4 @@ public class DesignTacoControllerTest {
                 .andExpect(header().stringValues("Location", "/orders/current"));
     }
 
-
 }
-

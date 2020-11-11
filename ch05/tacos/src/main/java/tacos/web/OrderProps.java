@@ -28,7 +28,7 @@ public class OrderProps {
         return pageSize;
     }
 
-    public void setPageSize(int pageSize) {
+    public void setPageSize(final int pageSize) {
         this.pageSize = pageSize;
     }
 

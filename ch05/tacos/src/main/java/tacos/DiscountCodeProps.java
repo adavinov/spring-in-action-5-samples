@@ -14,14 +14,13 @@ public class DiscountCodeProps {
 
     public DiscountCodeProps() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     public Map<String, Integer> getCodes() {
         return codes;
     }
 
-    public void setCodes(Map<String, Integer> codes) {
+    public void setCodes(final Map<String, Integer> codes) {
         this.codes = codes;
     }
 

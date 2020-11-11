@@ -1,8 +1,8 @@
 package tacos.security;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import tacos.User;
 
+import tacos.User;
 
 public class RegistrationForm {
 
@@ -18,7 +18,8 @@ public class RegistrationForm {
     public RegistrationForm() {
 
     }
-    public User toUser(PasswordEncoder passwordEncoder) {
+
+    public User toUser(final PasswordEncoder passwordEncoder) {
         return new User(username, passwordEncoder.encode(password), fullname, street, city, state, zip, phone);
     }
 
@@ -26,7 +27,7 @@ public class RegistrationForm {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
@@ -34,7 +35,7 @@ public class RegistrationForm {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
@@ -42,7 +43,7 @@ public class RegistrationForm {
         return fullname;
     }
 
-    public void setFullname(String fullname) {
+    public void setFullname(final String fullname) {
         this.fullname = fullname;
     }
 
@@ -50,7 +51,7 @@ public class RegistrationForm {
         return street;
     }
 
-    public void setStreet(String street) {
+    public void setStreet(final String street) {
         this.street = street;
     }
 
@@ -58,7 +59,7 @@ public class RegistrationForm {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(final String city) {
         this.city = city;
     }
 
@@ -66,7 +67,7 @@ public class RegistrationForm {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(final String state) {
         this.state = state;
     }
 
@@ -74,7 +75,7 @@ public class RegistrationForm {
         return zip;
     }
 
-    public void setZip(String zip) {
+    public void setZip(final String zip) {
         this.zip = zip;
     }
 
@@ -82,7 +83,7 @@ public class RegistrationForm {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(final String phone) {
         this.phone = phone;
     }
 

@@ -63,7 +63,7 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public void addDesign(Taco design) {
+    public void addDesign(final Taco design) {
         this.tacos.add(design);
     }
 
@@ -76,7 +76,7 @@ public class Order implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -84,7 +84,7 @@ public class Order implements Serializable {
         return placedAt;
     }
 
-    public void setPlacedAt(Date placedAt) {
+    public void setPlacedAt(final Date placedAt) {
         this.placedAt = placedAt;
     }
 
@@ -92,7 +92,7 @@ public class Order implements Serializable {
         return deliveryName;
     }
 
-    public void setDeliveryName(String deliveryName) {
+    public void setDeliveryName(final String deliveryName) {
         this.deliveryName = deliveryName;
     }
 
@@ -100,7 +100,7 @@ public class Order implements Serializable {
         return deliveryStreet;
     }
 
-    public void setDeliveryStreet(String deliveryStreet) {
+    public void setDeliveryStreet(final String deliveryStreet) {
         this.deliveryStreet = deliveryStreet;
     }
 
@@ -108,7 +108,7 @@ public class Order implements Serializable {
         return deliveryCity;
     }
 
-    public void setDeliveryCity(String deliveryCity) {
+    public void setDeliveryCity(final String deliveryCity) {
         this.deliveryCity = deliveryCity;
     }
 
@@ -116,7 +116,7 @@ public class Order implements Serializable {
         return deliveryState;
     }
 
-    public void setDeliveryState(String deliveryState) {
+    public void setDeliveryState(final String deliveryState) {
         this.deliveryState = deliveryState;
     }
 
@@ -124,7 +124,7 @@ public class Order implements Serializable {
         return deliveryZip;
     }
 
-    public void setDeliveryZip(String deliveryZip) {
+    public void setDeliveryZip(final String deliveryZip) {
         this.deliveryZip = deliveryZip;
     }
 
@@ -132,7 +132,7 @@ public class Order implements Serializable {
         return ccNumber;
     }
 
-    public void setCcNumber(String ccNumber) {
+    public void setCcNumber(final String ccNumber) {
         this.ccNumber = ccNumber;
     }
 
@@ -140,7 +140,7 @@ public class Order implements Serializable {
         return ccExpiration;
     }
 
-    public void setCcExpiration(String ccExpiration) {
+    public void setCcExpiration(final String ccExpiration) {
         this.ccExpiration = ccExpiration;
     }
 
@@ -148,7 +148,7 @@ public class Order implements Serializable {
         return ccCVV;
     }
 
-    public void setCcCVV(String ccCVV) {
+    public void setCcCVV(final String ccCVV) {
         this.ccCVV = ccCVV;
     }
 
@@ -156,7 +156,7 @@ public class Order implements Serializable {
         return tacos;
     }
 
-    public void setTacos(List<Taco> tacos) {
+    public void setTacos(final List<Taco> tacos) {
         this.tacos = tacos;
     }
 
@@ -164,7 +164,7 @@ public class Order implements Serializable {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 

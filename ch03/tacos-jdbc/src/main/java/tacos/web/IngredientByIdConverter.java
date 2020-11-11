@@ -10,16 +10,16 @@ import tacos.data.IngredientRepository;
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {
 
-	private IngredientRepository ingredientRepo;
+    private final IngredientRepository ingredientRepo;
 
-	@Autowired
-	public IngredientByIdConverter(IngredientRepository ingredientRepo) {
-		this.ingredientRepo = ingredientRepo;
-	}
+    @Autowired
+    public IngredientByIdConverter(final IngredientRepository ingredientRepo) {
+        this.ingredientRepo = ingredientRepo;
+    }
 
-	@Override
-	public Ingredient convert(String id) {
-		return ingredientRepo.findById(id);
-	}
+    @Override
+    public Ingredient convert(final String id) {
+        return ingredientRepo.findById(id);
+    }
 
 }

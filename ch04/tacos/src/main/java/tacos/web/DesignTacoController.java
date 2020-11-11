@@ -35,12 +35,12 @@ public class DesignTacoController {
     static Logger log = LoggerFactory.getLogger(DesignTacoController.class);
     private final IngredientRepository ingredientRepo;
 
-    private TacoRepository tacoRepo;
+    private final TacoRepository tacoRepo;
 
-    private UserRepository userRepo;
+    private final UserRepository userRepo;
 
     @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository tacoRepo, UserRepository userRepo) {
+    public DesignTacoController(final IngredientRepository ingredientRepo, final TacoRepository tacoRepo, final UserRepository userRepo) {
         this.ingredientRepo = ingredientRepo;
         this.tacoRepo = tacoRepo;
         this.userRepo = userRepo;
@@ -57,25 +57,25 @@ public class DesignTacoController {
     }
 
     @GetMapping
-    public String showDesignForm(Model model, Principal principal) {
+    public String showDesignForm(final Model model, final Principal principal) {
         log.info("   --- Designing taco");
-        List<Ingredient> ingredients = new ArrayList<>();
+        final List<Ingredient> ingredients = new ArrayList<>();
         ingredientRepo.findAll().forEach(i -> ingredients.add(i));
 
-        Type[] types = Ingredient.Type.values();
-        for (Type type : types) {
+        final Type[] types = Ingredient.Type.values();
+        for (final Type type : types) {
             model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
         }
 
-        String username = principal.getName();
-        User user = userRepo.findByUsername(username);
+        final String username = principal.getName();
+        final User user = userRepo.findByUsername(username);
         model.addAttribute("user", user);
 
         return "design";
     }
 
     @PostMapping
-    public String processDesign(@Valid Taco taco, Errors errors, @ModelAttribute Order order) {
+    public String processDesign(@Valid final Taco taco, final Errors errors, @ModelAttribute final Order order) {
 
         log.info("   --- Saving taco");
 
@@ -83,13 +83,13 @@ public class DesignTacoController {
             return "design";
         }
 
-        Taco saved = tacoRepo.save(taco);
+        final Taco saved = tacoRepo.save(taco);
         order.addDesign(saved);
 
         return "redirect:/orders/current";
     }
 
-    private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
+    private List<Ingredient> filterByType(final List<Ingredient> ingredients, final Type type) {
         return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
     }
 

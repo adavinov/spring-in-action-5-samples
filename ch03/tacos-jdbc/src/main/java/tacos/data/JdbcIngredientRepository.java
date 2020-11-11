@@ -15,67 +15,65 @@ import tacos.Ingredient;
 @Repository
 public class JdbcIngredientRepository implements IngredientRepository {
 
-	// tag::jdbcTemplate[]
-	private JdbcTemplate jdbc;
+    // tag::jdbcTemplate[]
+    private final JdbcTemplate jdbc;
 
-	// end::jdbcTemplate[]
+    // end::jdbcTemplate[]
 
-	@Autowired
-	public JdbcIngredientRepository(JdbcTemplate jdbc) {
-		this.jdbc = jdbc;
-	}
-//end::classShell[]
+    @Autowired
+    public JdbcIngredientRepository(final JdbcTemplate jdbc) {
+        this.jdbc = jdbc;
+    }
+    //end::classShell[]
 
-	// tag::finders[]
-	@Override
-	public Iterable<Ingredient> findAll() {
-		return jdbc.query("select id, name, type from Ingredient", this::mapRowToIngredient);
-	}
+    // tag::finders[]
+    @Override
+    public Iterable<Ingredient> findAll() {
+        return jdbc.query("select id, name, type from Ingredient", this::mapRowToIngredient);
+    }
 
-	// tag::findOne[]
-	@Override
-	public Ingredient findById(String id) {
-		return jdbc.queryForObject("select id, name, type from Ingredient where id=?", this::mapRowToIngredient, id);
-	}
+    // tag::findOne[]
+    @Override
+    public Ingredient findById(final String id) {
+        return jdbc.queryForObject("select id, name, type from Ingredient where id=?", this::mapRowToIngredient, id);
+    }
 
-	// end::findOne[]
+    // end::findOne[]
 
-	// end::finders[]
+    // end::finders[]
 
-	/*
-	 * //tag::preJava8RowMapper[]
-	 * 
-	 * @Override public Ingredient findOne(String id) { return jdbc.queryForObject(
-	 * "select id, name, type from Ingredient where id=?", new
-	 * RowMapper<Ingredient>() { public Ingredient mapRow(ResultSet rs, int rowNum)
-	 * throws SQLException { return new Ingredient( rs.getString("id"),
-	 * rs.getString("name"), Ingredient.Type.valueOf(rs.getString("type"))); }; },
-	 * id); } //end::preJava8RowMapper[]
-	 */
+    /*
+     * //tag::preJava8RowMapper[]
+     *
+     * @Override public Ingredient findOne(String id) { return jdbc.queryForObject(
+     * "select id, name, type from Ingredient where id=?", new RowMapper<Ingredient>() { public Ingredient mapRow(ResultSet
+     * rs, int rowNum) throws SQLException { return new Ingredient( rs.getString("id"), rs.getString("name"),
+     * Ingredient.Type.valueOf(rs.getString("type"))); }; }, id); } //end::preJava8RowMapper[]
+     */
 
-	// tag::save[]
-	@Override
-	public Ingredient save(Ingredient ingredient) {
-		jdbc.update("insert into Ingredient (id, name, type) values (?, ?, ?)", ingredient.getId(),
-				ingredient.getName(), ingredient.getType().toString());
-		return ingredient;
-	}
-	// end::save[]
+    // tag::save[]
+    @Override
+    public Ingredient save(final Ingredient ingredient) {
+        jdbc.update("insert into Ingredient (id, name, type) values (?, ?, ?)", ingredient.getId(),
+                ingredient.getName(), ingredient.getType().toString());
+        return ingredient;
+    }
+    // end::save[]
 
-	// tag::findOne[]
-	// tag::finders[]
-	private Ingredient mapRowToIngredient(ResultSet rs, int rowNum) throws SQLException {
-		return new Ingredient(rs.getString("id"), rs.getString("name"), Ingredient.Type.valueOf(rs.getString("type")));
-	}
-	// end::finders[]
-	// end::findOne[]
+    // tag::findOne[]
+    // tag::finders[]
+    private Ingredient mapRowToIngredient(final ResultSet rs, final int rowNum) throws SQLException {
+        return new Ingredient(rs.getString("id"), rs.getString("name"), Ingredient.Type.valueOf(rs.getString("type")));
+    }
+    // end::finders[]
+    // end::findOne[]
 
-	/*
-	 * //tag::classShell[]
-	 * 
-	 * ... //end::classShell[]
-	 */
-//tag::classShell[]
+    /*
+     * //tag::classShell[]
+     *
+     * ... //end::classShell[]
+     */
+    //tag::classShell[]
 
 }
 //end::classShell[]

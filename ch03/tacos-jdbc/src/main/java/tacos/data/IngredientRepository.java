@@ -4,10 +4,10 @@ import tacos.Ingredient;
 
 public interface IngredientRepository {
 
-	Iterable<Ingredient> findAll();
+    Iterable<Ingredient> findAll();
 
-	Ingredient findById(String id);
+    Ingredient findById(String id);
 
-	Ingredient save(Ingredient ingredient);
+    Ingredient save(Ingredient ingredient);
 
 }

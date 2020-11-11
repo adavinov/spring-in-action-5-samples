@@ -95,10 +95,10 @@ public class DesignAndOrderTacosBrowserTest {
     //
     // Browser test action methods
     //
-    private void buildAndSubmitATaco(String name, String... ingredients) {
+    private void buildAndSubmitATaco(final String name, final String... ingredients) {
         assertDesignPageElements();
 
-        for (String ingredient : ingredients) {
+        for (final String ingredient : ingredients) {
             browser.findElementByCssSelector("input[value='" + ingredient + "']").click();
         }
         browser.findElementByCssSelector("input#name").sendKeys(name);
@@ -109,7 +109,7 @@ public class DesignAndOrderTacosBrowserTest {
         assertEquals(loginPageUrl(), browser.getCurrentUrl());
     }
 
-    private void doRegistration(String username, String password) {
+    private void doRegistration(final String username, final String password) {
         browser.findElementByLinkText("here").click();
         assertEquals(registrationPageUrl(), browser.getCurrentUrl());
         browser.findElementByName("username").sendKeys(username);
@@ -124,15 +124,14 @@ public class DesignAndOrderTacosBrowserTest {
         browser.findElementByCssSelector("form#registerForm").submit();
     }
 
-
-    private void doLogin(String username, String password) {
+    private void doLogin(final String username, final String password) {
         browser.findElementByName("username").sendKeys(username);
         browser.findElementByName("password").sendKeys(password);
         browser.findElementByCssSelector("form#loginForm").submit();
     }
 
     private void doLogout() {
-        WebElement logoutForm = browser.findElementByCssSelector("form#logoutForm");
+        final WebElement logoutForm = browser.findElementByCssSelector("form#logoutForm");
         if (logoutForm != null) {
             logoutForm.submit();
         }
@@ -140,40 +139,39 @@ public class DesignAndOrderTacosBrowserTest {
 
     private void assertDesignPageElements() {
         assertEquals(designPageUrl(), browser.getCurrentUrl());
-        List<WebElement> ingredientGroups = browser.findElementsByClassName("ingredient-group");
+        final List<WebElement> ingredientGroups = browser.findElementsByClassName("ingredient-group");
         assertEquals(5, ingredientGroups.size());
 
-        WebElement wrapGroup = browser.findElementByCssSelector("div.ingredient-group#wraps");
-        List<WebElement> wraps = wrapGroup.findElements(By.tagName("div"));
+        final WebElement wrapGroup = browser.findElementByCssSelector("div.ingredient-group#wraps");
+        final List<WebElement> wraps = wrapGroup.findElements(By.tagName("div"));
         assertEquals(2, wraps.size());
         assertIngredient(wrapGroup, 0, "FLTO", "Flour Tortilla");
         assertIngredient(wrapGroup, 1, "COTO", "Corn Tortilla");
 
-        WebElement proteinGroup = browser.findElementByCssSelector("div.ingredient-group#proteins");
-        List<WebElement> proteins = proteinGroup.findElements(By.tagName("div"));
+        final WebElement proteinGroup = browser.findElementByCssSelector("div.ingredient-group#proteins");
+        final List<WebElement> proteins = proteinGroup.findElements(By.tagName("div"));
         assertEquals(2, proteins.size());
         assertIngredient(proteinGroup, 0, "GRBF", "Ground Beef");
         assertIngredient(proteinGroup, 1, "CARN", "Carnitas");
 
-        WebElement cheeseGroup = browser.findElementByCssSelector("div.ingredient-group#cheeses");
-        List<WebElement> cheeses = proteinGroup.findElements(By.tagName("div"));
+        final WebElement cheeseGroup = browser.findElementByCssSelector("div.ingredient-group#cheeses");
+        final List<WebElement> cheeses = proteinGroup.findElements(By.tagName("div"));
         assertEquals(2, cheeses.size());
         assertIngredient(cheeseGroup, 0, "CHED", "Cheddar");
         assertIngredient(cheeseGroup, 1, "JACK", "Monterrey Jack");
 
-        WebElement veggieGroup = browser.findElementByCssSelector("div.ingredient-group#veggies");
-        List<WebElement> veggies = proteinGroup.findElements(By.tagName("div"));
+        final WebElement veggieGroup = browser.findElementByCssSelector("div.ingredient-group#veggies");
+        final List<WebElement> veggies = proteinGroup.findElements(By.tagName("div"));
         assertEquals(2, veggies.size());
         assertIngredient(veggieGroup, 0, "TMTO", "Diced Tomatoes");
         assertIngredient(veggieGroup, 1, "LETC", "Lettuce");
 
-        WebElement sauceGroup = browser.findElementByCssSelector("div.ingredient-group#sauces");
-        List<WebElement> sauces = proteinGroup.findElements(By.tagName("div"));
+        final WebElement sauceGroup = browser.findElementByCssSelector("div.ingredient-group#sauces");
+        final List<WebElement> sauces = proteinGroup.findElements(By.tagName("div"));
         assertEquals(2, sauces.size());
         assertIngredient(sauceGroup, 0, "SLSA", "Salsa");
         assertIngredient(sauceGroup, 1, "SRCR", "Sour Cream");
     }
-
 
     private void fillInAndSubmitOrderForm() {
         assertTrue(browser.getCurrentUrl().startsWith(orderDetailsPageUrl()));
@@ -200,7 +198,7 @@ public class DesignAndOrderTacosBrowserTest {
 
         assertEquals(orderDetailsPageUrl(), browser.getCurrentUrl());
 
-        List<String> validationErrors = getValidationErrorTexts();
+        final List<String> validationErrors = getValidationErrorTexts();
         assertEquals(9, validationErrors.size());
         assertTrue(validationErrors.contains("Please correct the problems below and resubmit."));
         assertTrue(validationErrors.contains("Delivery name is required"));
@@ -214,8 +212,8 @@ public class DesignAndOrderTacosBrowserTest {
     }
 
     private List<String> getValidationErrorTexts() {
-        List<WebElement> validationErrorElements = browser.findElementsByClassName("validationError");
-        List<String> validationErrors = validationErrorElements.stream()
+        final List<WebElement> validationErrorElements = browser.findElementsByClassName("validationError");
+        final List<String> validationErrors = validationErrorElements.stream()
                 .map(el -> el.getText())
                 .collect(Collectors.toList());
         return validationErrors;
@@ -235,7 +233,7 @@ public class DesignAndOrderTacosBrowserTest {
 
         assertEquals(orderDetailsPageUrl(), browser.getCurrentUrl());
 
-        List<String> validationErrors = getValidationErrorTexts();
+        final List<String> validationErrors = getValidationErrorTexts();
         assertEquals(4, validationErrors.size());
         assertTrue(validationErrors.contains("Please correct the problems below and resubmit."));
         assertTrue(validationErrors.contains("Not a valid credit card number"));
@@ -243,16 +241,16 @@ public class DesignAndOrderTacosBrowserTest {
         assertTrue(validationErrors.contains("Invalid CVV"));
     }
 
-    private void fillField(String fieldName, String value) {
-        WebElement field = browser.findElementByCssSelector(fieldName);
+    private void fillField(final String fieldName, final String value) {
+        final WebElement field = browser.findElementByCssSelector(fieldName);
         field.clear();
         field.sendKeys(value);
     }
 
-    private void assertIngredient(WebElement ingredientGroup,
-            int ingredientIdx, String id, String name) {
-        List<WebElement> proteins = ingredientGroup.findElements(By.tagName("div"));
-        WebElement ingredient = proteins.get(ingredientIdx);
+    private void assertIngredient(final WebElement ingredientGroup,
+            final int ingredientIdx, final String id, final String name) {
+        final List<WebElement> proteins = ingredientGroup.findElements(By.tagName("div"));
+        final WebElement ingredient = proteins.get(ingredientIdx);
         assertEquals(id,
                 ingredient.findElement(By.tagName("input")).getAttribute("value"));
         assertEquals(name,
@@ -268,7 +266,6 @@ public class DesignAndOrderTacosBrowserTest {
         assertTrue(browser.getCurrentUrl().startsWith(orderDetailsPageUrl()));
         browser.findElementByCssSelector("a[id='another']").click();
     }
-
 
     //
     // URL helper methods

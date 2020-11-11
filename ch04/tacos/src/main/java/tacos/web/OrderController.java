@@ -23,14 +23,14 @@ import tacos.data.OrderRepository;
 @SessionAttributes("order")
 public class OrderController {
     static Logger log = LoggerFactory.getLogger(OrderController.class);
-    private OrderRepository orderRepo;
+    private final OrderRepository orderRepo;
 
-    public OrderController(OrderRepository orderRepo) {
+    public OrderController(final OrderRepository orderRepo) {
         this.orderRepo = orderRepo;
     }
 
     @GetMapping("/current")
-    public String orderForm(@AuthenticationPrincipal User user, @ModelAttribute Order order) {
+    public String orderForm(@AuthenticationPrincipal final User user, @ModelAttribute final Order order) {
         if (order.getDeliveryName() == null) {
             order.setDeliveryName(user.getFullname());
         }
@@ -52,8 +52,8 @@ public class OrderController {
 
     // tag::processOrderWithAuthenticationPrincipal[]
     @PostMapping
-    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus,
-            @AuthenticationPrincipal User user) {
+    public String processOrder(@Valid final Order order, final Errors errors, final SessionStatus sessionStatus,
+            @AuthenticationPrincipal final User user) {
 
         if (errors.hasErrors()) {
             return "orderForm";

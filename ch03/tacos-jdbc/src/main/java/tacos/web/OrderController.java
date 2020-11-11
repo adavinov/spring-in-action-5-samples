@@ -18,27 +18,27 @@ import tacos.data.OrderRepository;
 @SessionAttributes("order")
 public class OrderController {
 
-	private OrderRepository orderRepo;
+    private final OrderRepository orderRepo;
 
-	public OrderController(OrderRepository orderRepo) {
-		this.orderRepo = orderRepo;
-	}
+    public OrderController(final OrderRepository orderRepo) {
+        this.orderRepo = orderRepo;
+    }
 
-	@GetMapping("/current")
-	public String orderForm() {
-		return "orderForm";
-	}
+    @GetMapping("/current")
+    public String orderForm() {
+        return "orderForm";
+    }
 
-	@PostMapping
-	public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus) {
-		if (errors.hasErrors()) {
-			return "orderForm";
-		}
+    @PostMapping
+    public String processOrder(@Valid final Order order, final Errors errors, final SessionStatus sessionStatus) {
+        if (errors.hasErrors()) {
+            return "orderForm";
+        }
 
-		orderRepo.save(order);
-		sessionStatus.setComplete();
+        orderRepo.save(order);
+        sessionStatus.setComplete();
 
-		return "redirect:/";
-	}
+        return "redirect:/";
+    }
 
 }

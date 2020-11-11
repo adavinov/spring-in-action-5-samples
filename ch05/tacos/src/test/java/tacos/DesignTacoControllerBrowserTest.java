@@ -49,26 +49,26 @@ public class DesignTacoControllerBrowserTest {
     public void testDesignATacoPage() throws Exception {
         browser.get("http://localhost:" + port + "/design");
 
-        List<WebElement> ingredientGroups = browser.findElementsByClassName("ingredient-group");
+        final List<WebElement> ingredientGroups = browser.findElementsByClassName("ingredient-group");
         assertEquals(5, ingredientGroups.size());
 
-        WebElement wrapGroup = ingredientGroups.get(0);
-        List<WebElement> wraps = wrapGroup.findElements(By.tagName("div"));
+        final WebElement wrapGroup = ingredientGroups.get(0);
+        final List<WebElement> wraps = wrapGroup.findElements(By.tagName("div"));
         assertEquals(2, wraps.size());
         assertIngredient(wrapGroup, 0, "FLTO", "Flour Tortilla");
         assertIngredient(wrapGroup, 1, "COTO", "Corn Tortilla");
 
-        WebElement proteinGroup = ingredientGroups.get(1);
-        List<WebElement> proteins = proteinGroup.findElements(By.tagName("div"));
+        final WebElement proteinGroup = ingredientGroups.get(1);
+        final List<WebElement> proteins = proteinGroup.findElements(By.tagName("div"));
         assertEquals(2, proteins.size());
         assertIngredient(proteinGroup, 0, "GRBF", "Ground Beef");
         assertIngredient(proteinGroup, 1, "CARN", "Carnitas");
     }
 
-    private void assertIngredient(WebElement ingredientGroup,
-            int ingredientIdx, String id, String name) {
-        List<WebElement> proteins = ingredientGroup.findElements(By.tagName("div"));
-        WebElement ingredient = proteins.get(ingredientIdx);
+    private void assertIngredient(final WebElement ingredientGroup,
+            final int ingredientIdx, final String id, final String name) {
+        final List<WebElement> proteins = ingredientGroup.findElements(By.tagName("div"));
+        final WebElement ingredient = proteins.get(ingredientIdx);
         assertEquals(id,
                 ingredient.findElement(By.tagName("input")).getAttribute("value"));
         assertEquals(name,

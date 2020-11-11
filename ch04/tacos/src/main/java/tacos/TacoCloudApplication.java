@@ -11,15 +11,15 @@ import tacos.data.IngredientRepository;
 @SpringBootApplication
 public class TacoCloudApplication {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(TacoCloudApplication.class, args);
     }
 
     @Bean
-    public CommandLineRunner dataLoader(IngredientRepository repo) {
+    public CommandLineRunner dataLoader(final IngredientRepository repo) {
         return new CommandLineRunner() {
             @Override
-            public void run(String... args) throws Exception {
+            public void run(final String... args) throws Exception {
                 repo.save(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));
                 repo.save(new Ingredient("COTO", "Corn Tortilla", Type.WRAP));
                 repo.save(new Ingredient("GRBF", "Ground Beef", Type.PROTEIN));

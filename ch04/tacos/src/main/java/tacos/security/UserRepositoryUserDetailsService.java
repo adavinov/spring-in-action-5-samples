@@ -12,16 +12,16 @@ import tacos.data.UserRepository;
 @Service
 public class UserRepositoryUserDetailsService implements UserDetailsService {
 
-    private UserRepository userRepo;
+    private final UserRepository userRepo;
 
     @Autowired
-    public UserRepositoryUserDetailsService(UserRepository userRepo) {
+    public UserRepositoryUserDetailsService(final UserRepository userRepo) {
         this.userRepo = userRepo;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByUsername(username);
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+        final User user = userRepo.findByUsername(username);
         if (user != null) {
             return user;
         }

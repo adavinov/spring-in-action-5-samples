@@ -32,82 +32,80 @@ import tacos.data.TacoRepository;
 //tag::injectingIngredientRepository[]
 public class DesignTacoController {
 
-	private final IngredientRepository ingredientRepo;
+    private final IngredientRepository ingredientRepo;
 
-	// end::injectingIngredientRepository[]
-	private TacoRepository tacoRepo;
+    // end::injectingIngredientRepository[]
+    private final TacoRepository tacoRepo;
 
-	// end::injectingDesignRepository[]
-	/*
-	 * //tag::injectingIngredientRepository[] public
-	 * DesignTacoController(IngredientRepository ingredientRepo) {
-	 * this.ingredientRepo = ingredientRepo; }
-	 * //end::injectingIngredientRepository[]
-	 */
-	// tag::injectingDesignRepository[]
+    // end::injectingDesignRepository[]
+    /*
+     * //tag::injectingIngredientRepository[] public DesignTacoController(IngredientRepository ingredientRepo) {
+     * this.ingredientRepo = ingredientRepo; } //end::injectingIngredientRepository[]
+     */
+    // tag::injectingDesignRepository[]
 
-	@Autowired
-	public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository tacoRepo) {
-		this.ingredientRepo = ingredientRepo;
-		this.tacoRepo = tacoRepo;
-	}
+    @Autowired
+    public DesignTacoController(final IngredientRepository ingredientRepo, final TacoRepository tacoRepo) {
+        this.ingredientRepo = ingredientRepo;
+        this.tacoRepo = tacoRepo;
+    }
 
-	@ModelAttribute(name = "order")
-	public Order order() {
-		return new Order();
-	}
+    @ModelAttribute(name = "order")
+    public Order order() {
+        return new Order();
+    }
 
-	@ModelAttribute(name = "design")
-	public Taco design() {
-		return new Taco();
-	}
+    @ModelAttribute(name = "design")
+    public Taco design() {
+        return new Taco();
+    }
 
-	// end::injectingDesignRepository[]
+    // end::injectingDesignRepository[]
 
-	// tag::injectingIngredientRepository[]
+    // tag::injectingIngredientRepository[]
 
-	@GetMapping
-	public String showDesignForm(Model model) {
-		List<Ingredient> ingredients = new ArrayList<>();
-		ingredientRepo.findAll().forEach(i -> ingredients.add(i));
+    @GetMapping
+    public String showDesignForm(final Model model) {
+        final List<Ingredient> ingredients = new ArrayList<>();
+        ingredientRepo.findAll().forEach(i -> ingredients.add(i));
 
-		Type[] types = Ingredient.Type.values();
-		for (Type type : types) {
-			model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
-		}
+        final Type[] types = Ingredient.Type.values();
+        for (final Type type : types) {
+            model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
+        }
 
-		return "design";
-	}
-	// end::injectingIngredientRepository[]
+        return "design";
+    }
+    // end::injectingIngredientRepository[]
 
-//tag::injectingDesignRepository[]
-	@PostMapping
-	public String processDesign(@Valid Taco taco, Errors errors, @ModelAttribute Order order) {
+    //tag::injectingDesignRepository[]
+    @PostMapping
+    public String processDesign(@Valid final Taco taco, final Errors errors, @ModelAttribute final Order order) {
 
-		if (errors.hasErrors()) {
-			return "design";
-		}
+        if (errors.hasErrors()) {
+            return "design";
+        }
 
-		Taco saved = tacoRepo.save(taco);
-		order.addDesign(saved);
+        final Taco saved = tacoRepo.save(taco);
+        order.addDesign(saved);
 
-		return "redirect:/orders/current";
-	}
+        return "redirect:/orders/current";
+    }
 
-//end::injectingDesignRepository[]
+    //end::injectingDesignRepository[]
 
-	private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
-		return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
-	}
+    private List<Ingredient> filterByType(final List<Ingredient> ingredients, final Type type) {
+        return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
+    }
 
-	/*
-	 * //tag::injectingDesignRepository[] //tag::injectingIngredientRepository[]
-	 * 
-	 * ... //end::injectingIngredientRepository[] //end::injectingDesignRepository[]
-	 */
+    /*
+     * //tag::injectingDesignRepository[] //tag::injectingIngredientRepository[]
+     *
+     * ... //end::injectingIngredientRepository[] //end::injectingDesignRepository[]
+     */
 
-//tag::injectingDesignRepository[]
-//tag::injectingIngredientRepository[]
+    //tag::injectingDesignRepository[]
+    //tag::injectingIngredientRepository[]
 
 }
 //end::injectingIngredientRepository[]

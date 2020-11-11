@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import tacos.Taco;
 import tacos.Ingredient;
 import tacos.Ingredient.Type;
 import tacos.Order;
-import tacos.data.TacoRepository;
+import tacos.Taco;
 import tacos.data.IngredientRepository;
+import tacos.data.TacoRepository;
 
 // tag::classShell[]
 @Controller
@@ -29,88 +29,88 @@ import tacos.data.IngredientRepository;
 @SessionAttributes("order")
 public class DesignTacoController {
 
-//end::classShell[]
+    //end::classShell[]
 
-//tag::bothRepoProperties[]
-//tag::ingredientRepoProperty[]
-	private final IngredientRepository ingredientRepo;
+    //tag::bothRepoProperties[]
+    //tag::ingredientRepoProperty[]
+    private final IngredientRepository ingredientRepo;
 
-//end::ingredientRepoProperty[]
-	private TacoRepository designRepo;
+    //end::ingredientRepoProperty[]
+    private final TacoRepository designRepo;
 
-//end::bothRepoProperties[]
+    //end::bothRepoProperties[]
 
-	/*
-	 * // tag::ingredientRepoOnlyCtor[]
-	 * 
-	 * @Autowired public DesignTacoController(IngredientRepository ingredientRepo) {
-	 * this.ingredientRepo = ingredientRepo; } // end::ingredientRepoOnlyCtor[]
-	 */
+    /*
+     * // tag::ingredientRepoOnlyCtor[]
+     *
+     * @Autowired public DesignTacoController(IngredientRepository ingredientRepo) { this.ingredientRepo = ingredientRepo; }
+     * // end::ingredientRepoOnlyCtor[]
+     */
 
-	// tag::bothRepoCtor[]
-	@Autowired
-	public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository designRepo) {
-		this.ingredientRepo = ingredientRepo;
-		this.designRepo = designRepo;
-	}
+    // tag::bothRepoCtor[]
+    @Autowired
+    public DesignTacoController(final IngredientRepository ingredientRepo, final TacoRepository designRepo) {
+        this.ingredientRepo = ingredientRepo;
+        this.designRepo = designRepo;
+    }
 
-	// end::bothRepoCtor[]
+    // end::bothRepoCtor[]
 
-	// tag::modelAttributes[]
-	@ModelAttribute(name = "order")
-	public Order order() {
-		return new Order();
-	}
+    // tag::modelAttributes[]
+    @ModelAttribute(name = "order")
+    public Order order() {
+        return new Order();
+    }
 
-	@ModelAttribute(name = "taco")
-	public Taco taco() {
-		return new Taco();
-	}
+    @ModelAttribute(name = "taco")
+    public Taco taco() {
+        return new Taco();
+    }
 
-	// end::modelAttributes[]
-	// tag::showDesignForm[]
+    // end::modelAttributes[]
+    // tag::showDesignForm[]
 
-	@GetMapping
-	public String showDesignForm(Model model) {
-		List<Ingredient> ingredients = new ArrayList<>();
-		ingredientRepo.findAll().forEach(i -> ingredients.add(i));
+    @GetMapping
+    public String showDesignForm(final Model model) {
+        final List<Ingredient> ingredients = new ArrayList<>();
+        ingredientRepo.findAll().forEach(i -> ingredients.add(i));
 
-		Type[] types = Ingredient.Type.values();
-		for (Type type : types) {
-			model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
-		}
+        final Type[] types = Ingredient.Type.values();
+        for (final Type type : types) {
+            model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
+        }
 
-		return "design";
-	}
-//end::showDesignForm[]
+        return "design";
+    }
+    //end::showDesignForm[]
 
-	// tag::processDesign[]
-	@PostMapping
-	public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order) {
+    // tag::processDesign[]
+    @PostMapping
+    public String processDesign(@Valid final Taco design, final Errors errors, @ModelAttribute final Order order) {
 
-		if (errors.hasErrors()) {
-			return "design";
-		}
+        if (errors.hasErrors()) {
+            return "design";
+        }
 
-		Taco saved = designRepo.save(design);
-		order.addDesign(saved);
+        final Taco saved = designRepo.save(design);
+        order.addDesign(saved);
 
-		return "redirect:/orders/current";
-	}
-	// end::processDesign[]
+        return "redirect:/orders/current";
+    }
+    // end::processDesign[]
 
-	private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
-		return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
-	}
+    private List<Ingredient> filterByType(final List<Ingredient> ingredients, final Type type) {
+        return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
+    }
 
-	/*
-	 * //tag::classShell[]
-	 * 
-	 * ...
-	 * 
-	 * //end::classShell[]
-	 */
-//tag::classShell[]
+    /*
+     * //tag::classShell[]
+     *
+     * ...
+     *
+     * //end::classShell[]
+     */
+    //tag::classShell[]
 
 }
 //end::classShell[]

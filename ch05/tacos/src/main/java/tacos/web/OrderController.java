@@ -26,23 +26,23 @@ import tacos.data.OrderRepository;
 @SessionAttributes("order")
 public class OrderController {
 
-    private OrderRepository orderRepo;
+    private final OrderRepository orderRepo;
 
     //end::OrderController_base[]
 
     // tag::ordersForUser_paged_withHolder[]
-    private OrderProps props;
+    private final OrderProps props;
 
-    public OrderController(OrderRepository orderRepo,
-            OrderProps props) {
+    public OrderController(final OrderRepository orderRepo,
+            final OrderProps props) {
         this.orderRepo = orderRepo;
         this.props = props;
     }
     // end::ordersForUser_paged_withHolder[]
 
     @GetMapping("/current")
-    public String orderForm(@AuthenticationPrincipal User user,
-            @ModelAttribute Order order) {
+    public String orderForm(@AuthenticationPrincipal final User user,
+            @ModelAttribute final Order order) {
         if (order.getDeliveryName() == null) {
             order.setDeliveryName(user.getFullname());
         }
@@ -63,9 +63,9 @@ public class OrderController {
     }
 
     @PostMapping
-    public String processOrder(@Valid Order order, Errors errors,
-            SessionStatus sessionStatus,
-            @AuthenticationPrincipal User user) {
+    public String processOrder(@Valid final Order order, final Errors errors,
+            final SessionStatus sessionStatus,
+            @AuthenticationPrincipal final User user) {
 
         if (errors.hasErrors()) {
             return "orderForm";
@@ -80,20 +80,20 @@ public class OrderController {
     }
 
     /*
-  //tag::ordersForUser_paged_withHolder[]
-
-    ...
-
-  //end::ordersForUser_paged_withHolder[]
-  
-   */
+     * //tag::ordersForUser_paged_withHolder[]
+     *
+     * ...
+     *
+     * //end::ordersForUser_paged_withHolder[]
+     *
+     */
 
     // tag::ordersForUser_paged_withHolder[]
     @GetMapping
     public String ordersForUser(
-            @AuthenticationPrincipal User user, Model model) {
+            @AuthenticationPrincipal final User user, final Model model) {
 
-        Pageable pageable = PageRequest.of(0, props.getPageSize());
+        final Pageable pageable = PageRequest.of(0, props.getPageSize());
         model.addAttribute("orders",
                 orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
 
@@ -102,45 +102,40 @@ public class OrderController {
     // end::ordersForUser_paged_withHolder[]
 
     /*
-  // tag::ordersForUser_paged[]
-  @GetMapping
-  public String ordersForUser(
-      @AuthenticationPrincipal User user, Model model) {
-
-    Pageable pageable = PageRequest.of(0, 20);
-    model.addAttribute("orders",
-        orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
-
-    return "orderList";
-  }
-  // end::ordersForUser_paged[]
-
-   */
+     * // tag::ordersForUser_paged[]
+     *
+     * @GetMapping public String ordersForUser(
+     *
+     * @AuthenticationPrincipal User user, Model model) {
+     *
+     * Pageable pageable = PageRequest.of(0, 20); model.addAttribute("orders", orderRepo.findByUserOrderByPlacedAtDesc(user,
+     * pageable));
+     *
+     * return "orderList"; } // end::ordersForUser_paged[]
+     *
+     */
 
     /*
-  // tag::ordersForUser[]
-  @GetMapping
-  public String ordersForUser(
-      @AuthenticationPrincipal User user, Model model) {
-
-    model.addAttribute("orders",
-        orderRepo.findByUserOrderByPlacedAtDesc(user));
-
-    return "orderList";
-  }
-  // end::ordersForUser[]
-
-   */
+     * // tag::ordersForUser[]
+     *
+     * @GetMapping public String ordersForUser(
+     *
+     * @AuthenticationPrincipal User user, Model model) {
+     *
+     * model.addAttribute("orders", orderRepo.findByUserOrderByPlacedAtDesc(user));
+     *
+     * return "orderList"; } // end::ordersForUser[]
+     *
+     */
 
     /*
-  //tag::OrderController_base[]
-
-    ...
-
-  //end::OrderController_base[]
-
-   */
-
+     * //tag::OrderController_base[]
+     *
+     * ...
+     *
+     * //end::OrderController_base[]
+     *
+     */
 
     //tag::OrderController_base[]
 }

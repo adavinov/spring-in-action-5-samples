@@ -28,7 +28,7 @@ public class Taco {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -36,13 +36,13 @@ public class Taco {
         return ingredients;
     }
 
-    public void setIngredients(List<String> ingredients) {
+    public void setIngredients(final List<String> ingredients) {
         this.ingredients = ingredients;
     }
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         builder.append("Taco [name=");
         builder.append(name);
         builder.append(", ingredients=");
@@ -55,30 +55,37 @@ public class Taco {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((ingredients == null) ? 0 : ingredients.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = (prime * result) + ((ingredients == null) ? 0 : ingredients.hashCode());
+        result = (prime * result) + ((name == null) ? 0 : name.hashCode());
         return result;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Taco other = (Taco) obj;
+        }
+        final Taco other = (Taco) obj;
         if (ingredients == null) {
-            if (other.ingredients != null)
+            if (other.ingredients != null) {
                 return false;
-        } else if (!ingredients.equals(other.ingredients))
+            }
+        } else if (!ingredients.equals(other.ingredients)) {
             return false;
+        }
         if (name == null) {
-            if (other.name != null)
+            if (other.name != null) {
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        } else if (!name.equals(other.name)) {
             return false;
+        }
         return true;
     }
 

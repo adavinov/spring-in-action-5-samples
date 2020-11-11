@@ -17,9 +17,7 @@ public interface OrderRepository
     // end::findByUser_paged[]
 
     /*
-  // tag::findByUser[]
-  List<Order> findByUserOrderByPlacedAtDesc(User user);
-  // end::findByUser[]
-   */
+     * // tag::findByUser[] List<Order> findByUserOrderByPlacedAtDesc(User user); // end::findByUser[]
+     */
 
 }

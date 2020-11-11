@@ -63,7 +63,7 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public void addDesign(Taco design) {
+    public void addDesign(final Taco design) {
         this.tacos.add(design);
     }
 
@@ -76,7 +76,7 @@ public class Order implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -84,7 +84,7 @@ public class Order implements Serializable {
         return placedAt;
     }
 
-    public void setPlacedAt(Date placedAt) {
+    public void setPlacedAt(final Date placedAt) {
         this.placedAt = placedAt;
     }
 
@@ -92,7 +92,7 @@ public class Order implements Serializable {
         return deliveryName;
     }
 
-    public void setDeliveryName(String deliveryName) {
+    public void setDeliveryName(final String deliveryName) {
         this.deliveryName = deliveryName;
     }
 
@@ -100,7 +100,7 @@ public class Order implements Serializable {
         return deliveryStreet;
     }
 
-    public void setDeliveryStreet(String deliveryStreet) {
+    public void setDeliveryStreet(final String deliveryStreet) {
         this.deliveryStreet = deliveryStreet;
     }
 
@@ -108,7 +108,7 @@ public class Order implements Serializable {
         return deliveryCity;
     }
 
-    public void setDeliveryCity(String deliveryCity) {
+    public void setDeliveryCity(final String deliveryCity) {
         this.deliveryCity = deliveryCity;
     }
 
@@ -116,7 +116,7 @@ public class Order implements Serializable {
         return deliveryState;
     }
 
-    public void setDeliveryState(String deliveryState) {
+    public void setDeliveryState(final String deliveryState) {
         this.deliveryState = deliveryState;
     }
 
@@ -124,7 +124,7 @@ public class Order implements Serializable {
         return deliveryZip;
     }
 
-    public void setDeliveryZip(String deliveryZip) {
+    public void setDeliveryZip(final String deliveryZip) {
         this.deliveryZip = deliveryZip;
     }
 
@@ -132,7 +132,7 @@ public class Order implements Serializable {
         return ccNumber;
     }
 
-    public void setCcNumber(String ccNumber) {
+    public void setCcNumber(final String ccNumber) {
         this.ccNumber = ccNumber;
     }
 
@@ -140,7 +140,7 @@ public class Order implements Serializable {
         return ccExpiration;
     }
 
-    public void setCcExpiration(String ccExpiration) {
+    public void setCcExpiration(final String ccExpiration) {
         this.ccExpiration = ccExpiration;
     }
 
@@ -148,7 +148,7 @@ public class Order implements Serializable {
         return ccCVV;
     }
 
-    public void setCcCVV(String ccCVV) {
+    public void setCcCVV(final String ccCVV) {
         this.ccCVV = ccCVV;
     }
 
@@ -156,7 +156,7 @@ public class Order implements Serializable {
         return tacos;
     }
 
-    public void setTacos(List<Taco> tacos) {
+    public void setTacos(final List<Taco> tacos) {
         this.tacos = tacos;
     }
 
@@ -164,7 +164,7 @@ public class Order implements Serializable {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 
@@ -172,90 +172,117 @@ public class Order implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((ccCVV == null) ? 0 : ccCVV.hashCode());
-        result = prime * result + ((ccExpiration == null) ? 0 : ccExpiration.hashCode());
-        result = prime * result + ((ccNumber == null) ? 0 : ccNumber.hashCode());
-        result = prime * result + ((deliveryCity == null) ? 0 : deliveryCity.hashCode());
-        result = prime * result + ((deliveryName == null) ? 0 : deliveryName.hashCode());
-        result = prime * result + ((deliveryState == null) ? 0 : deliveryState.hashCode());
-        result = prime * result + ((deliveryStreet == null) ? 0 : deliveryStreet.hashCode());
-        result = prime * result + ((deliveryZip == null) ? 0 : deliveryZip.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((placedAt == null) ? 0 : placedAt.hashCode());
-        result = prime * result + ((tacos == null) ? 0 : tacos.hashCode());
-        result = prime * result + ((user == null) ? 0 : user.hashCode());
+        result = (prime * result) + ((ccCVV == null) ? 0 : ccCVV.hashCode());
+        result = (prime * result) + ((ccExpiration == null) ? 0 : ccExpiration.hashCode());
+        result = (prime * result) + ((ccNumber == null) ? 0 : ccNumber.hashCode());
+        result = (prime * result) + ((deliveryCity == null) ? 0 : deliveryCity.hashCode());
+        result = (prime * result) + ((deliveryName == null) ? 0 : deliveryName.hashCode());
+        result = (prime * result) + ((deliveryState == null) ? 0 : deliveryState.hashCode());
+        result = (prime * result) + ((deliveryStreet == null) ? 0 : deliveryStreet.hashCode());
+        result = (prime * result) + ((deliveryZip == null) ? 0 : deliveryZip.hashCode());
+        result = (prime * result) + ((id == null) ? 0 : id.hashCode());
+        result = (prime * result) + ((placedAt == null) ? 0 : placedAt.hashCode());
+        result = (prime * result) + ((tacos == null) ? 0 : tacos.hashCode());
+        result = (prime * result) + ((user == null) ? 0 : user.hashCode());
         return result;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Order other = (Order) obj;
+        }
+        final Order other = (Order) obj;
         if (ccCVV == null) {
-            if (other.ccCVV != null)
+            if (other.ccCVV != null) {
                 return false;
-        } else if (!ccCVV.equals(other.ccCVV))
+            }
+        } else if (!ccCVV.equals(other.ccCVV)) {
             return false;
+        }
         if (ccExpiration == null) {
-            if (other.ccExpiration != null)
+            if (other.ccExpiration != null) {
                 return false;
-        } else if (!ccExpiration.equals(other.ccExpiration))
+            }
+        } else if (!ccExpiration.equals(other.ccExpiration)) {
             return false;
+        }
         if (ccNumber == null) {
-            if (other.ccNumber != null)
+            if (other.ccNumber != null) {
                 return false;
-        } else if (!ccNumber.equals(other.ccNumber))
+            }
+        } else if (!ccNumber.equals(other.ccNumber)) {
             return false;
+        }
         if (deliveryCity == null) {
-            if (other.deliveryCity != null)
+            if (other.deliveryCity != null) {
                 return false;
-        } else if (!deliveryCity.equals(other.deliveryCity))
+            }
+        } else if (!deliveryCity.equals(other.deliveryCity)) {
             return false;
+        }
         if (deliveryName == null) {
-            if (other.deliveryName != null)
+            if (other.deliveryName != null) {
                 return false;
-        } else if (!deliveryName.equals(other.deliveryName))
+            }
+        } else if (!deliveryName.equals(other.deliveryName)) {
             return false;
+        }
         if (deliveryState == null) {
-            if (other.deliveryState != null)
+            if (other.deliveryState != null) {
                 return false;
-        } else if (!deliveryState.equals(other.deliveryState))
+            }
+        } else if (!deliveryState.equals(other.deliveryState)) {
             return false;
+        }
         if (deliveryStreet == null) {
-            if (other.deliveryStreet != null)
+            if (other.deliveryStreet != null) {
                 return false;
-        } else if (!deliveryStreet.equals(other.deliveryStreet))
+            }
+        } else if (!deliveryStreet.equals(other.deliveryStreet)) {
             return false;
+        }
         if (deliveryZip == null) {
-            if (other.deliveryZip != null)
+            if (other.deliveryZip != null) {
                 return false;
-        } else if (!deliveryZip.equals(other.deliveryZip))
+            }
+        } else if (!deliveryZip.equals(other.deliveryZip)) {
             return false;
+        }
         if (id == null) {
-            if (other.id != null)
+            if (other.id != null) {
                 return false;
-        } else if (!id.equals(other.id))
+            }
+        } else if (!id.equals(other.id)) {
             return false;
+        }
         if (placedAt == null) {
-            if (other.placedAt != null)
+            if (other.placedAt != null) {
                 return false;
-        } else if (!placedAt.equals(other.placedAt))
+            }
+        } else if (!placedAt.equals(other.placedAt)) {
             return false;
+        }
         if (tacos == null) {
-            if (other.tacos != null)
+            if (other.tacos != null) {
                 return false;
-        } else if (!tacos.equals(other.tacos))
+            }
+        } else if (!tacos.equals(other.tacos)) {
             return false;
+        }
         if (user == null) {
-            if (other.user != null)
+            if (other.user != null) {
                 return false;
-        } else if (!user.equals(other.user))
+            }
+        } else if (!user.equals(other.user)) {
             return false;
+        }
         return true;
     }
 

@@ -15,11 +15,11 @@ import tacos.data.UserRepository;
 public class DevelopmentConfig {
 
     @Bean
-    public CommandLineRunner dataLoader(IngredientRepository repo,
-            UserRepository userRepo, PasswordEncoder encoder) { // user repo for ease of testing with a built-in user
+    public CommandLineRunner dataLoader(final IngredientRepository repo,
+            final UserRepository userRepo, final PasswordEncoder encoder) { // user repo for ease of testing with a built-in user
         return new CommandLineRunner() {
             @Override
-            public void run(String... args) throws Exception {
+            public void run(final String... args) throws Exception {
                 repo.save(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));
                 repo.save(new Ingredient("COTO", "Corn Tortilla", Type.WRAP));
                 repo.save(new Ingredient("GRBF", "Ground Beef", Type.PROTEIN));
@@ -30,7 +30,6 @@ public class DevelopmentConfig {
                 repo.save(new Ingredient("JACK", "Monterrey Jack", Type.CHEESE));
                 repo.save(new Ingredient("SLSA", "Salsa", Type.SAUCE));
                 repo.save(new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
-
 
                 userRepo.save(new User("habuma", encoder.encode("password"),
                         "Craig Walls", "123 North Street", "Cross Roads", "TX",
