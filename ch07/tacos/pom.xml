@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>sia</groupId>
   	<artifactId>taco-cloud-ch07-parent</artifactId>
-		<version>0.0.7-SNAPSHOT</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<properties>
@@ -89,7 +89,6 @@
 <dependency>
     <groupId>jakarta.xml.bind</groupId>
     <artifactId>jakarta.xml.bind-api</artifactId>
-    <version>2.3.2</version>
 </dependency>
 
 <!-- Runtime, com.sun.xml.bind module -->

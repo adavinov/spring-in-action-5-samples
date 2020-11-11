@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--autobuild-->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
           http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>sia</groupId>
 	<artifactId>taco-cloud-ch04</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>taco-cloud</name>
 	<description>Taco Cloud Example</description>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.2.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<groupId>sia</groupId>
+		<artifactId>taco</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../../</relativePath> 
 	</parent>
 
 	<properties>
@@ -84,6 +82,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+						<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		<!-- end::springSecurity[] -->
 
